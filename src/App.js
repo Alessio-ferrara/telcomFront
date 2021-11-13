@@ -1,12 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import authService from "./services/authService";
+
+import Login from "./login/pages/Login";
+
 function App() {
   const user = authService.getCurrentRuolo();
 
@@ -15,44 +13,30 @@ function App() {
   if (user) {
     if (user === "User") {
       routes = (
-        <Switch>
-          <Route path="/" exact></Route>
-          <Redirect to="/" />
-        </Switch>
+        <Routes>
+          <Route path="/"></Route>
+        </Routes>
       );
     } else {
       routes = (
-        <Switch>
-          <Route path="/" exact></Route>
-          <Redirect to="/" />
-        </Switch>
+        <Routes>
+          <Route path="/"></Route>
+        </Routes>
       );
     }
   } else {
     routes = (
-      <Switch>
-        <Route path="/login" exact></Route>
-        <Redirect to="/login" />
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
     );
   }
+  console.log(routes)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+
+      <main>{routes}</main>
+    </Router>
   );
 }
 
