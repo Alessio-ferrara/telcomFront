@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom'
 function App() {
+
+  let routes;
   return (
     <div className="App">
       <header className="App-header">
