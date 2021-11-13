@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import authService from "./services/authService";
 
-import Login from "./login/pages/Login";
+import Login from "./auth/pages/Login";
 
 function App() {
   const user = authService.getCurrentRuolo();
