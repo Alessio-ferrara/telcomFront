@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import authService from "./services/authService";
 
 import Login from "./auth/pages/Login";
+import NavBar from "./shared/components/NavBar";
 
 function App() {
   const user = authService.getCurrentRuolo();
@@ -34,7 +35,7 @@ function App() {
   console.log(routes)
   return (
     <Router>
-
+      <NavBar/>
       <main>{routes}</main>
     </Router>
   );
