@@ -32,7 +32,6 @@ function App() {
       </Routes>
     );
   }
-  console.log(routes)
   return (
     <Router>
       <NavBar/>
