@@ -14,7 +14,8 @@ const loginSchema = Yup.object().shape({
 const Login = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
-  const [recupera, setRecupera] = useState()
+  const [recupera, setRecupera] = useState();
+  console.log(process.env.JAVA_BASE_URL)
 
 
   const loginData = useFormik({
@@ -29,13 +30,15 @@ const Login = () => {
           process.env.JAVA_BASE_URL + "/auth/",
           "POST",
           JSON.stringify({
-            email: values.email,
+            username: values.username,
             password: values.password
           }),
           {
             "Content-Type" : "application/json"
           }
         )
+
+        console.log(process.env.JAVA_BASE_URL)
       } catch(error) {
         Swal.fire({
           icon: "error",
