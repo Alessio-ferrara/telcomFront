@@ -15,7 +15,6 @@ const Login = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
   const [recupera, setRecupera] = useState();
-  console.log(process.env.JAVA_BASE_URL)
 
 
   const loginData = useFormik({
@@ -27,7 +26,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const responseData = await sendRequest(
-          process.env.JAVA_BASE_URL + "/auth/",
+          process.env.REACT_JAVA_BASE_URL + "/auth/",
           "POST",
           JSON.stringify({
             username: values.username,
