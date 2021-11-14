@@ -15,7 +15,7 @@ const Login = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
   const [recupera, setRecupera] = useState();
-  console.log(process.env.JAVA_BASE_URL)
+  console.log(process.env.REACT_APP_FRONT_URL)
 
 
   const loginData = useFormik({
@@ -27,7 +27,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const responseData = await sendRequest(
-          process.env.JAVA_BASE_URL + "/auth/",
+          process.env.REACT_APP_JAVA_BASE_URL + "/auth/login",
           "POST",
           JSON.stringify({
             username: values.username,
@@ -38,7 +38,7 @@ const Login = () => {
           }
         )
 
-        console.log(process.env.JAVA_BASE_URL)
+        console.log(responseData)
       } catch(error) {
         Swal.fire({
           icon: "error",
