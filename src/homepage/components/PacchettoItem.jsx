@@ -1,10 +1,5 @@
 import {
-  faBriefcase,
-  faEnvelope,
-  faHome,
-  faMobile,
-  faPassport,
-  faSearchPlus,
+
   faUsers,
   faBroadcastTower,
 } from "@fortawesome/free-solid-svg-icons";

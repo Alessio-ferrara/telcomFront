@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHttpClient } from "../../util/http-hook";
 import ListaPacchetti from '../components/ListaPacchetti'
 
-import { useFormik } from "formik";
-import { Form, Card, Button, Icon, Header } from "semantic-ui-react";
 import Swal from "sweetalert2";
-import * as Yup from "yup";
+
 
 const LandingPage = () => {
   //query al database per ottenere i pacchetti
