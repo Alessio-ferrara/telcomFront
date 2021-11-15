@@ -1,10 +1,5 @@
 import {
-  faBriefcase,
-  faEnvelope,
-  faHome,
-  faMobile,
-  faPassport,
-  faSearchPlus,
+
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
