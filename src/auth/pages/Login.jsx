@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useHttpClient } from "../../util/http-hook";
+
 
 import { useFormik } from "formik";
 import { Form, Card, Button, Icon, Header } from "semantic-ui-react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
+
+import { useHttpClient } from "../../util/http-hook";
+import authService from "../../services/authService";
 
 const loginSchema = Yup.object().shape({
   username: Yup.string().required(),
@@ -15,8 +18,6 @@ const Login = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
   const [recupera, setRecupera] = useState();
-  console.log(process.env.REACT_APP_FRONT_URL)
-
 
   const loginData = useFormik({
     initialValues: {
@@ -37,8 +38,13 @@ const Login = () => {
             "Content-Type" : "application/json"
           }
         )
-
         console.log(responseData)
+        authService.login(
+          responseData.username,
+          responseData.token,
+          responseData.type
+        );
+
       } catch(error) {
         Swal.fire({
           icon: "error",
