@@ -1,7 +1,7 @@
 import React from "react-bootstrap"
 
-const Footer = () => <footer className="page-footer font-small blue pt-4 fixed-bottom mt-4">
-    <div className="container-fluid text-center text-md-left">
+const Cards = () => <div className="container-fluid">
+    <div className="text-center text-md-left">
         <div className="row">
             <div className="col-md-6 mt-md-0 mt-3">
                 <h5 className="text-uppercase">Footer Content</h5>
@@ -33,10 +33,9 @@ const Footer = () => <footer className="page-footer font-small blue pt-4 fixed-b
     </div>
 
     <div className="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="https://mdbootstrap.com/"> Francesco Mazzola</a>
-        <i class="fa fa-android" aria-hidden="true"></i>
+        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
     </div>
 
-</footer>
+</div>
 
-export default Footer
+export default Cards

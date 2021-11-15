@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Login from "./auth/pages/Login";
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/Footer";
-import LandingPage from "./shared/components/LandingPage";
+import LandingPage from "./homepage/pages/LandingPage";
 
 
 
@@ -35,12 +35,7 @@ function App() {
       <Routes>
         {/* we route to the Login.jsx in auth/pages */}
         <Route path="/login" element={<Login/>}/>
-      </Routes>
-    );
-    routes = (
-      <Routes>
-        {/* we route to the Login.jsx in auth/pages */}
-        <Route path="/" element={<Login/>}/>
+        <Route path="/" element={<LandingPage/>}></Route>
       </Routes>
     );
   }
@@ -48,7 +43,6 @@ function App() {
     <Router>
       <NavBar/>
       <main>{routes}
-      {/* <LandingPage/> */}
       </main>
       <Footer/>
     </Router>
