@@ -20,13 +20,13 @@ function App() {
     if (user === "User") {
       routes = (
         <Routes>
-          <Route path="/"></Route>
+          <Route path="/" element={<LandingPage/>}></Route>
         </Routes>
       );
     } else {
       routes = (
         <Routes>
-          <Route path="/"></Route>
+
         </Routes>
       );
     }

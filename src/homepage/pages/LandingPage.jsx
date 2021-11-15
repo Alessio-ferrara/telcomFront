@@ -1,5 +1,6 @@
-import React ,{ useState,useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import { useHttpClient } from "../../util/http-hook";
+import ListaPacchetti from '../components/ListaPacchetti'
 
 import { useFormik } from "formik";
 import { Form, Card, Button, Icon, Header } from "semantic-ui-react";
@@ -10,34 +11,27 @@ const LandingPage = () => {
   //query al database per ottenere i pacchetti
   const { sendRequest, isLoading } = useHttpClient();
   const [pacchetti, setPacchetti] = useState();
-  console.log(process.env.REACT_APP_FRONT_URL)
+  console.log(process.env.REACT_APP_FRONT_URL);
 
   useEffect(() => {
-    const getPacchetti = async() => {
-
-
-  try {
-      async function getPackages() {
+    const getPacchetti = async () => {
+      try {
         const response = await sendRequest(
-          process.env.REACT_APP_JAVA_BASE_URL + "/packages",
+          process.env.REACT_APP_JAVA_BASE_URL + "/package",
           "GET",
           null
-        )
-        setPacchetti(response)
+        );
+        setPacchetti(response);
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Qualcosa è andato storto...",
+          text: error.message,
+        });
       }
-      getPacka©ges()
-    } catch(error) {
-      Swal.fire({
-        icon: "error",
-        title: "Qualcosa è andato storto...",
-        text: error.message,
-      });
-    }
-
-    }
+    };
     getPacchetti();
-    
-  },[sendRequest])
+  }, [sendRequest]);
 
   return (
     <React.Fragment>
@@ -48,13 +42,14 @@ const LandingPage = () => {
           <p>The newest company for mobile and fixed telehone! </p>
           <hr />
           <h3>Have a look to our available packages</h3>
-          {JSON.stringify(pacchetti)}
+          {!isLoading && pacchetti && (
+            <ListaPacchetti pacchetti = {pacchetti}  />
+
+          )}
         </div>
       </div>
     </React.Fragment>
   );
-
 };
 
 export default LandingPage;
-
