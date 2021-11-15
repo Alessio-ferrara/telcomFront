@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import authService from "./services/authService";
 import 'semantic-ui-css/semantic.min.css';
 
-import Login from "./auth/pages/Login";
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/Footer";
+import Login from "./auth/pages/Login";
 import LandingPage from "./homepage/pages/LandingPage";
+import PackagePage from "./pkgs/pages/PackagePage";
+
 
 
 
@@ -36,6 +38,8 @@ function App() {
         {/* we route to the Login.jsx in auth/pages */}
         <Route path="/login" element={<Login/>}/>
         <Route path="/" element={<LandingPage/>}></Route>
+        <Route path="/package/:id" element={<PackagePage/>}></Route>
+
       </Routes>
     );
   }

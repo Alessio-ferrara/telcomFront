@@ -20,15 +20,20 @@ const ListaPacchetti = (props) => {
       } else {
         return (
           <React.Fragment>
-            <ul className=" p-0 my-2 mx-3">
+            <div className=" p-0 my-2 mx-3">
+              <div className="row">
               {props.pacchetti.map((pacchetto) => (
+                //prendo il props pacchetti ricevuto e lo mando al pacchetto item
                 <PacchettoItem
                   key={pacchetto.PkgID}
                   name={pacchetto.name}
                   description={pacchetto.description}
+                  id_pkg={pacchetto.PkgID}
                 />
               ))}
-            </ul>
+            </div>
+            </div>
+
             <br></br>
           </React.Fragment>
         );

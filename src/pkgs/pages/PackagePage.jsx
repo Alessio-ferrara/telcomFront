@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams
+} from "react-router-dom";
 import { useHttpClient } from "../../util/http-hook";
-import ListaPacchetti from '../components/ListaPacchetti'
+// import ListaPacchetti from '../components/ListaPacchetti'
 
 import { useFormik } from "formik";
 import { Form, Card, Button, Icon, Header } from "semantic-ui-react";
 import Swal from "sweetalert2";
-import * as Yup from "yup";
 
-const LandingPage = () => {
+const PackagePage = () => {
   //query al database per ottenere i pacchetti
   const { sendRequest, isLoading } = useHttpClient();
-  const [pacchetti, setPacchetti] = useState();
+  const id = useParams(); //per prendere l'id dall'URL
+
+  const [servizi, setServizi] = useState();
   // console.log(process.env.REACT_APP_FRONT_URL);
 
   useEffect(() => {
-    const getPacchetti = async () => {
+    const getServizi = async () => {
       try {
-        const response = await sendRequest(
-          process.env.REACT_APP_JAVA_BASE_URL + "/package",
+        const response = await sendRequest( //passo l'id al backend per cercare i servizi inclusi nel pacchetto
+          process.env.REACT_APP_JAVA_BASE_URL + "/package/info/" + {id},
           "GET",
           null
         );
-        setPacchetti(response);
+        setServizi(response);
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -30,7 +38,7 @@ const LandingPage = () => {
         });
       }
     };
-    getPacchetti();
+    getServizi();
   }, [sendRequest]);
 
   return (
@@ -38,18 +46,13 @@ const LandingPage = () => {
       {/* usare un component in cui importare i dati per formattarli nel frontend */}
       <div className="jumbotron">
         <div className="container mt-2">
-          <h1>Welcome to Telcom</h1>
-          <p>The newest company for mobile and fixed telehone! </p>
-          <hr />
-          <h3>Have a look to our available packages</h3>
-          {!isLoading && pacchetti && (
-            <ListaPacchetti pacchetti = {pacchetti}  />
-            // uso il component listapacchetti passando i pacchetti ricevuti dopo la query al backend
-          )}
+            <h1>
+              {servizi}
+            </h1>
         </div>
-      </div>
+        </div>
     </React.Fragment>
   );
 };
 
-export default LandingPage;
+export default PackagePage;
