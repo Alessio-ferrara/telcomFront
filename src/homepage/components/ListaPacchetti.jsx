@@ -29,7 +29,6 @@ const ListaPacchetti = (props) => {
                   name={pacchetto.name}
                   description={pacchetto.description}
                   id_pkg={pacchetto.pkgID}
-                  pkg = {pacchetto}
                 />
               ))}
             </div>

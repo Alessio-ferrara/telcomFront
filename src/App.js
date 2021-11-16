@@ -38,7 +38,7 @@ function App() {
         {/* we route to the Login.jsx in auth/pages */}
         <Route path="/login" element={<Login/>}/>
         <Route path="/" element={<LandingPage/>}></Route>
-        <Route path="/package/:id" element={<PackagePage/>}></Route>
+        <Route path="/packagedetails/:pkgID" element={<PackagePage/>}></Route>
 
       </Routes>
     );
