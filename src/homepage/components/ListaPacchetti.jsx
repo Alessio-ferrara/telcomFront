@@ -25,10 +25,11 @@ const ListaPacchetti = (props) => {
               {props.pacchetti.map((pacchetto) => (
                 //prendo il props pacchetti ricevuto e lo mando al pacchetto item
                 <PacchettoItem
-                  key={pacchetto.PkgID}
+                  key={pacchetto.pkgID}
                   name={pacchetto.name}
                   description={pacchetto.description}
-                  id_pkg={pacchetto.PkgID}
+                  id_pkg={pacchetto.pkgID}
+                  pkg = {pacchetto}
                 />
               ))}
             </div>

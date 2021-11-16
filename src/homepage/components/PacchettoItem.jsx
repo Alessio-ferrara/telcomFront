@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 
 const PacchettoItem = (props) => {
+
+  console.log(props.pkg)
   return (
     <div
       className="card shadow col-sm-9 mx-auto mt-4 col-md-4 mt-3 mb-3 pt-3 pb-3"
@@ -23,13 +25,13 @@ const PacchettoItem = (props) => {
           <span style={{ fontWeight: 800 }} className="ml-1">
             <h3>
             {props.name}
-            {props.key}
+
             </h3>
           </span>
           <span>
           {props.description}
           <br/>
-          <Link to={`/${props.key}`} className=" btn btn-primary text-decoration-none" activeClassName="active">Scopri di più...</Link>
+          <Link to={`/${props.id_pkg}`} className=" btn btn-primary text-decoration-none" activeClassName="active">Scopri di più...</Link>
           </span>
         </div>
         <div>
