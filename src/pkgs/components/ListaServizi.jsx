@@ -3,7 +3,6 @@ import React from "react";
  import ServizioItem from './ServizioItem'
 
 const ListaServizi = (props) => {
-  console.log(props.pkg);
     if (props.servizi.length === 0) {
         return (
           <div className="mx-0 justify-content-center">
