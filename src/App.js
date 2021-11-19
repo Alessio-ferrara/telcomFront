@@ -9,6 +9,8 @@ import Footer from "./shared/components/Footer";
 import Login from "./auth/pages/Login";
 import LandingPage from "./homepage/pages/LandingPage";
 import PackagePage from "./pkgs/pages/PackagePage";
+import ConfirmationPage from "./pkgs/pages/ConfirmationPage";
+
 
 
 
@@ -39,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/" element={<LandingPage/>}></Route>
         <Route path="/packagedetails/:pkgID" element={<PackagePage/>}></Route>
+        <Route path="/confirmationpage" element={<ConfirmationPage/>}></Route>
 
       </Routes>
     );

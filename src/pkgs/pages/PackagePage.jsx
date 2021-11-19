@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SemanticDatepicker from 'react-semantic-ui-datepickers';
+
 
 import {
   BrowserRouter as Router,
@@ -17,18 +19,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useFormik } from "formik";
-import {
-  Form,
-  Input,
-  input,
-  Icon,
-  Header,
-  Label,
-  Button,
-} from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import ListaServizi from "../components/ListaServizi";
+import ListaOptional from "../components/ListaOptional";
+import ConfirmationPage from "./ConfirmationPage";
 
 //dati che ci servono obbligatoriamente per prendere le cose
 const confirmSchema = Yup.object().shape({
@@ -46,7 +42,10 @@ const PackagePage = () => {
   const id = useParams().pkgID; //per prendere l'id dall'URL
   const [infoPacchetto, setInfoPacchetto] = useState();
   const [prices, setPrices] = useState();
-  const [optional, setOptional] = useState();
+  const [optionals, setOptionals] = useState();
+  const [currentDate, setNewDate] = useState();
+
+  
   // console.log(process.env.REACT_APP_FRONT_URL);
   const confirmationData = useFormik({
     initialValues: {
@@ -56,6 +55,8 @@ const PackagePage = () => {
       validity: "",
       price: 0,
       optionals: [],
+      services : [],
+      date : "",
     },
     validationSchema: confirmSchema,
     onSubmit: async (values) => {
@@ -65,22 +66,44 @@ const PackagePage = () => {
   const handleChangeValidity = (validity) => {
     let amount = validity.childNodes[0].innerText;
     let months = validity.childNodes[1].innerText;
-    confirmationData.setFieldValue("price", amount);
+    confirmationData.setFieldValue("price", parseFloat(amount.split(" ")[1]));
     confirmationData.setFieldTouched("price");
     confirmationData.setFieldValue("validity", months);
+  };
+
+  const changeData = (event, data) => {
+    setNewDate(data.value);
+    confirmationData.setFieldValue("date", data.value)
+    
+  }
+
+  const AddOptional = (id, montlycost, name) => {
+    let array = confirmationData.values.optionals;
+    let found = 0;
+    console.log(name);
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].id == id) {
+        array.splice(i, 1);
+        confirmationData.values.price -= parseFloat(montlycost);
+        found = 1;
+      }
+    }
+    if (!found) {
+      array.push({ id, montlycost, name });
+      confirmationData.values.price += parseFloat(montlycost);
+    }
+
+    confirmationData.setFieldValue("optionals", array);
+    console.log(confirmationData.values);
   };
   useEffect(() => {
     const getInfoPacchetto = async () => {
       try {
         const response = await sendRequest(
           process.env.REACT_APP_JAVA_BASE_URL + "/package/info/" + id,
-          // prendiamoci anche i price e nella dropdown del validitu stampiamo price.validity e al change del valore aggiornaimo il costo
-          //prendendo il dato inserito e moltiplicandolo per price.duration
-          //creiamo una mappa delle coppie di ogni tupla price e troviamo il costo come proce.validiy*(Map(price.validity.value()))
           "GET",
           null
         );
-        // console.log(response);
         setInfoPacchetto(response);
         if (response.prices) {
           const pricesResponse = [];
@@ -89,13 +112,14 @@ const PackagePage = () => {
               key: price.duration,
               value: price.duration,
               text: price.duration,
-              description: "€ "+price.amount,
+              description: "€ " + price.amount,
             });
           });
           setPrices(pricesResponse);
         }
         confirmationData.setFieldValue("name", response.name);
         confirmationData.setFieldValue("description", response.description);
+        confirmationData.setFieldValue("services", response.services)
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -108,11 +132,11 @@ const PackagePage = () => {
       try {
         const response = await sendRequest(
           process.env.REACT_APP_JAVA_BASE_URL + "/optional/",
-           "GET",
+          "GET",
           null
         );
         // console.log(response);
-        setOptional(response);
+        setOptionals(response);
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -175,23 +199,41 @@ const PackagePage = () => {
                         //error={confirmationData.errors.validity && confirmationData.touched.validity}
                       />
                     )}
-                    {/* <ListaOptional */}
+                    <SemanticDatepicker locale="it-IT" style={{display:"block"}} onChange={changeData}/>
+                    {!isLoading && optionals && (
+                      <ListaOptional
+                        optionals={optionals}
+                        AddOptional={AddOptional}
+                      />
+                    )}
                     <center>
-                      <Button fluid color="facebook" size="big">
-                        <FontAwesomeIcon icon={faShoppingBag} />
-                        &nbsp; Completa l'acquisto >
-                      </Button>
+                      {confirmationData.values && (
+                        <Button
+                          fluid
+                          color="facebook"
+                          size="big"
+                          onClick={() => {
+                            navigate("/confirmationpage", {
+                              state: confirmationData.values,
+                            });
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faShoppingBag} />
+                          &nbsp; Completa l'acquisto >
+                        </Button>
+                      )}
                     </center>
                     <hr />
                     <div>
-                      <div className="row text-decoration-underline" style={{fontWeight : "bold",  fontSize: "1.1em"}}>
-                        <div className="col-10">
-                        Totale:
+                      <div
+                        className="row text-decoration-underline"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        <div className="col-9">Totale:</div>
+                        <div className="col">
+                          {"€ " + confirmationData.values.price}
                         </div>
-                        <div className="col-2">
-                        €12.00
-                        </div>
-                         </div>
+                      </div>
                     </div>
                   </Form>
                 </div>
