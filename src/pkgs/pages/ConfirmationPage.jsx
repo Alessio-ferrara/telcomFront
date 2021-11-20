@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useFormik } from "formik";
-import { Form, Button, Label } from "semantic-ui-react";
+import { Form, Button, Label, Header, Segment } from "semantic-ui-react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import ListaServizi from "../components/ListaServizi";
@@ -36,51 +36,80 @@ const ConfirmationPage = (props) => {
           Description:
           <span> {data.description}</span>
         </div>
-        <div className="row">
-          <div className="col">
-            Validity:
-            <span className="col"> {data.validity + " mesi "}</span>
-            <br />
-            Starting from:
-            {" " + moment(data.date).format("DD/MM/YYYY")}
-          </div>
-        </div>
       </div>
       <hr />
       <div className="row">
         <div className="col-6">
-          <h4 style={{ fontWeight: "bold" }}>Chosen services:</h4>
+          <h4 style={{ fontWeight: "bold" }}>Included services:</h4>
         </div>
         <span className="col-6">
           <ul>
             {data.services.map((service) => (
-              <Label color="blue">{service.name}</Label>
+              <Label color="blue" size="large" className="mb-2">
+                {service.name}
+              </Label>
             ))}
           </ul>
         </span>
       </div>
       <div className="row">
         <div className="col-6">
-          <h4 style={{ fontWeight: "bold" }}>Chosen optionals:</h4>
+          <h4 style={{ fontWeight: "bold" }}>Added optionals:</h4>
         </div>
         <span className="col-6">
           <ul>
             {data.optionals.map((optional) => (
-              <Label color="blue">{optional.name}</Label>
+              <Label color="blue" size="large" className="mb-2">
+                {optional.name}
+              </Label>
             ))}
           </ul>
         </span>
       </div>
+      <Segment className="mt-3 rounded-pill text-center" secondary attached>
+        Confirming the purchase will lead to the payment page, not completing
+        the payment the unpaid order will be added to your "Unpaid Orders" in
+        order to let you complete the purchasing.
+      </Segment>
+      {/* <div style={{marginTop: "100px"}}>
+        Confirming the purchase will lead to the payment page, not completing the payment the unpaid order will be added to your "Unpaid Orders" in order to 
+        let you complete the purchasing.
+        </div> */}
       <div style={{ marginTop: "50px" }}>
-        <div className="h3" style={{ fontWeight: "bold", textAlign: "right" }}>
-          Total Cost: €{data.price}
+        <div
+          className="display-6 col-md-12 col-12"
+          style={{ fontWeight: "", textAlign: "right" }}
+        >
+          <span style={{fontWeight:"normal", marginRight:"15px"}}>Total Cost: €{data.price}</span>
+          <br />
+          <p
+            style={{
+              fontWeight: "",
+              fontSize: "20px",
+              textAlign: "right",
+              marginRight: "35px",
+            }}
+          >
+            Validity:
+            {" " + data.validity + " months"}
+            <p
+              style={{
+                marginRight: "-10px",
+              }}
+            >
+              Starting from:
+              {" " + moment(data.date).format("DD/MM/YYYY")}
+            </p>
+          </p>
           <div className="mt-3">
             {!utente ? (
-              <Button.Group size="large">
-                <Button>&nbsp;Login&nbsp;</Button>
-                <Button.Or />
-                <Button positive>Register</Button>
-              </Button.Group>
+              <div>
+                <Button.Group size="huge">
+                  <Button color="blue">&nbsp;Log-in&nbsp;</Button>
+                  <Button.Or />
+                  <Button>Sign-up</Button>
+                </Button.Group>
+              </div>
             ) : (
               <Button>Acquista</Button>
             )}

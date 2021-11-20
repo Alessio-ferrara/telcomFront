@@ -199,7 +199,14 @@ const PackagePage = () => {
                         //error={confirmationData.errors.validity && confirmationData.touched.validity}
                       />
                     )}
-                    <SemanticDatepicker locale="it-IT" style={{display:"block"}} onChange={changeData}/>
+                    <SemanticDatepicker
+                    locale="it-IT"
+                    filterDate={(date) => {
+                      const now = new Date();
+                      return date >= now;
+                    }}
+                    style={{display:"block"}}
+                    onChange={changeData}/>
                     {!isLoading && optionals && (
                       <ListaOptional
                         optionals={optionals}

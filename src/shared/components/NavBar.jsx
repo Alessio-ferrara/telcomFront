@@ -19,7 +19,7 @@ const NavBar = () => {
   const user = authService.getCurrentUsername();
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="blue" expand="lg">
       <Container className="">
         <Navbar.Brand href="/">
           <img
@@ -27,18 +27,18 @@ const NavBar = () => {
             width="35"
             height="35"
             src="/logo.jpeg"
-            className="d-inline-block align-top"
-          />{" "}
-          Telcom
+            className="d-inline-block align-end"
+          />{"Telcom"}
         </Navbar.Brand>{" "}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">
-              <FontAwesomeIcon className="fa-lg" icon={faHome} />
+              {/* <FontAwesomeIcon className="fa-lg" icon={faHome} /> */}
               {"Homepage"}
             </Nav.Link>
-            <Nav.Link href="/">I miei acquisti</Nav.Link>
+            <Nav.Link href="/">Unpaid Orders</Nav.Link>
+            {/* <Nav.Link href="/">Orders History</Nav.Link> */}
 
             {/* <Nav.Link href="">Link</Nav.Link> */}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -76,7 +76,7 @@ const NavBar = () => {
               </React.Fragment>
             ) : (
               <Nav.Link
-                className="right-align btn btn-primary text-light pl-3 pr-3"
+                className="right-align btn btn-primary rounded-pill text-light pl-3 pr-3"
                 style={{ marginLeft: 5 }}
                 href="/login"
               >
