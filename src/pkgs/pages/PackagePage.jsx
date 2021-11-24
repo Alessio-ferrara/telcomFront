@@ -44,9 +44,6 @@ const PackagePage = () => {
   const [prices, setPrices] = useState();
   const [optionals, setOptionals] = useState();
   const [currentDate, setNewDate] = useState();
-
-  
-  // console.log(process.env.REACT_APP_FRONT_URL);
   const confirmationData = useFormik({
     initialValues: {
       id_pkg: id,
@@ -74,7 +71,6 @@ const PackagePage = () => {
   const changeData = (event, data) => {
     setNewDate(data.value);
     confirmationData.setFieldValue("date", data.value)
-    
   }
 
   const AddOptional = (id, montlycost, name) => {
