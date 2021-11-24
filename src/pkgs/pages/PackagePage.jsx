@@ -76,7 +76,7 @@ const PackagePage = () => {
   const AddOptional = (id, montlycost, name) => {
     let array = confirmationData.values.optionals;
     let found = 0;
-    console.log(name);
+    // console.log(name);
     for (let i = 0; i < array.length; i++) {
       if (array[i].id == id) {
         array.splice(i, 1);
@@ -90,7 +90,7 @@ const PackagePage = () => {
     }
 
     confirmationData.setFieldValue("optionals", array);
-    console.log(confirmationData.values);
+    // console.log(confirmationData.values);
   };
   useEffect(() => {
     const getInfoPacchetto = async () => {
@@ -151,9 +151,9 @@ const PackagePage = () => {
         {!isLoading && infoPacchetto && (
           <div className="container mt-3">
             <div className="container" style={{ paddingBottom: "5vh" }}>
-              <h1 className="" style={{ fontWeight: "bold" }}>
+              <div className="display-6" style={{ fontWeight: "normal" }}>
                 {infoPacchetto.name}
-              </h1>
+              </div>
               <h3 className="text-muted">{infoPacchetto.description}</h3>
             </div>
             <div className="container-fluid row" style={{ padding: "0 0 0 0" }}>
@@ -163,7 +163,7 @@ const PackagePage = () => {
                 className="col-md-6 col-12"
               >
                 {/* nbsp for life */}
-                &nbsp;&nbsp;Servizi inclusi nel pacchetto:
+                &nbsp;&nbsp;Services included:
                 {!isLoading && infoPacchetto && (
                   <ListaServizi
                     servizi={infoPacchetto.services}
@@ -174,7 +174,7 @@ const PackagePage = () => {
               </div>
               <div className="card col-md-6 col-12">
                 <div class="card-body">
-                  <h2 class="card-title text-center"> Purchase Package </h2>
+                  <div class="card-title text-center display-6"> Purchase Package </div>
                   <p class="card-text">
                     You can add optional services to your standar package by
                     selecting them in the form below
@@ -197,6 +197,7 @@ const PackagePage = () => {
                     )}
                     <SemanticDatepicker
                     locale="it-IT"
+                    label = "Starting from:"
                     filterDate={(date) => {
                       const now = new Date();
                       return date >= now;
@@ -218,11 +219,12 @@ const PackagePage = () => {
                           onClick={() => {
                             navigate("/confirmationpage", {
                               state: confirmationData.values,
+
                             });
                           }}
                         >
                           <FontAwesomeIcon icon={faShoppingBag} />
-                          &nbsp; Completa l'acquisto >
+                          &nbsp; Purchase
                         </Button>
                       )}
                     </center>
@@ -232,7 +234,7 @@ const PackagePage = () => {
                         className="row text-decoration-underline"
                         style={{ fontWeight: "bold" }}
                       >
-                        <div className="col-9">Totale:</div>
+                        <div className="col-9">Total:</div>
                         <div className="col">
                           {"€ " + confirmationData.values.price}
                         </div>

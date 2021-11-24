@@ -39,6 +39,7 @@ const Login = () => {
           }
         );
         authService.login(
+          responseData.userID,
           responseData.username,
           responseData.token,
           responseData.type

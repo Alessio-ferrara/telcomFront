@@ -1,12 +1,14 @@
 class AuthService {
-    login(username, token, ruolo) {
-      sessionStorage.setItem("id", JSON.stringify(username));
+    login(id, username, token, ruolo) {
+      sessionStorage.setItem("id", JSON.stringify(id));
+      sessionStorage.setItem("username", JSON.stringify(username));
       sessionStorage.setItem("token", JSON.stringify(token));
       sessionStorage.setItem("ruolo", JSON.stringify(ruolo))
     }
   
     logout() {
       sessionStorage.removeItem("id");
+      sessionStorage.removeItem("username");
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("ruolo")
     }
@@ -20,6 +22,9 @@ class AuthService {
     }
 
     getCurrentUsername() {
+      return JSON.parse(sessionStorage.getItem("username"));
+    }
+    getCurrentId() {
       return JSON.parse(sessionStorage.getItem("id"));
     }
   }
