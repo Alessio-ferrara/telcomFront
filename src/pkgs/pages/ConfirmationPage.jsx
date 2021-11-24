@@ -19,39 +19,25 @@ import ListaOptional from "../components/ListaOptional";
 import authService from "../../services/authService";
 import moment from "moment";
 
-const orderSchema = Yup.object().shape({
-  OrderID: Yup.number().integer().required(),
-  refUser: Yup.number().integer().required(),
-  refPkg: Yup.number().integer().required(),
-  datetime: Yup.date().required(),
-  paid: Yup.boolean().required(),
-  amount: Yup.number().test(
-    "is-decimal",
-    "invalid decimal",
-    (value) => (value + "").match(/^\d*\.{1}\d*$/) //regex to check if decimal
-  ),
-  startingdate: Yup.date().required(),
-  duration: Yup.number().integer().required(),
-});
-
 const ConfirmationPage = (props) => {
   const location = useLocation();
   const { sendRequest, isLoading } = useHttpClient();
   const data = location.state;
   const utente = authService.getCurrentToken();
+  
   const createOrder = async() =>{
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
         "POST",
         JSON.stringify({
-          refUser: authService.getCurrentId(),
-          refPkg: data.id_pkg,
+          refUser: parseInt(authService.getCurrentId()),
+          refPkg: parseInt(data.id_pkg),
           datetime: moment().format("DD/MM/YYYY"),
           paid: (Math.random() < 0.5) ? true : false,
-          amount: data.price,
-          startingdate: moment(data.date).format("DD/MM/YYYY"),
-          duration: data.validity,
+          amount: parseInt(data.price),
+          startingDate: moment(data.date).format("DD/MM/YYYY"),
+          duration: parseInt(data.validity),
         }),
         {
           "Content-Type": "application/json",
@@ -159,7 +145,6 @@ const ConfirmationPage = (props) => {
                 <Button
                   size="huge"
                   color="facebook"
-                  type="submit"
                   onClick={createOrder}
                 >
                   Confirm Purchase
