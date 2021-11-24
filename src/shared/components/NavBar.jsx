@@ -30,7 +30,7 @@ const NavBar = () => {
               {/* <FontAwesomeIcon className="fa-lg" icon={faHome} /> */}
               {"Homepage"}
             </Nav.Link>
-            <Nav.Link href="/">Unpaid Orders</Nav.Link>
+            <Nav.Link href="/unpaidorders">Unpaid Orders</Nav.Link>
             {/* <Nav.Link href="/">Orders History</Nav.Link> */}
 
             {/* <Nav.Link href="">Link</Nav.Link> */}

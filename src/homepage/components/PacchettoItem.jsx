@@ -19,31 +19,10 @@ const PacchettoItem = (props) => {
       {props.name}
     </div>
     <hr/>
-    <div className="text-decoration-none text-muted text-center mt-2">
+    <div className="text-decoration-none text-muted text-center mt-2 mb-3">
     <strong>{props.description}</strong>
     </div>
 <Link to={`/packagedetails/${props.id_pkg}`} className=" btn btn-primary btn-lg text-decoration-none mt-3" activeClassName="active">Scopri di più...</Link>
-      {/* <div
-        className="d-flex mb-3 mt-2"
-        style={{ fontSize: "105%" }}
-      >
-        <div>
-          <FontAwesomeIcon className="fa-lg text-muted" icon={faBroadcastTower} />{" "}
-          <span style={{ fontWeight: 800 }} className="ml-1">
-            <h3>
-            {props.name}
-            </h3>
-          </span>
-          <span>
-          {props.description}
-          <br/>
-          <Link to={`/packagedetails/${props.id_pkg}`} className=" btn btn-primary text-decoration-none" activeClassName="active">Scopri di più...</Link>
-          </span>
-        </div>
-        <div>
-      </div>
-
-    </div> */}
     </div>
   );
 };

@@ -12,7 +12,7 @@ import PackagePage from "./pkgs/pages/PackagePage";
 import ConfirmationPage from "./pkgs/pages/ConfirmationPage";
 import HomePageEmp from "./employee/homepage/HomePageEmp";
 import LoginAdministrator from "./auth/pages/LoginAdministrator";
-
+import UnpaidOrders from "./orders/pages/UnpaidOrders.jsx";
 function App() {
   const user = authService.getCurrentRuolo();
 
@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/packagedetails/:pkgID" element={<PackagePage />} />
           <Route path="/confirmationpage" element={<ConfirmationPage />} />
-          <Route path="/unpaidorders" element={<ConfirmationPage />} />
+          <Route path="/unpaidorders" element={<UnpaidOrders />} />
         </Routes>
       );
     } else {
