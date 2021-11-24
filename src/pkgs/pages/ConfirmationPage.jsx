@@ -39,46 +39,33 @@ const ConfirmationPage = (props) => {
   const { sendRequest, isLoading } = useHttpClient();
   const data = location.state;
   const utente = authService.getCurrentToken();
-
-  const orderData = useFormik({
-    initialValues: {
-      refUser: authService.getCurrentId(),
-      refPkg: data.id_pkg,
-      datetime: moment().format("DD/MM/YYYY"),
-      paid: Math.random() < 0.5,
-      amount: data.price,
-      startingdate: moment(data.date).format("DD/MM/YYYY"),
-      duration: data.validity,
-    },
-    validationSchema: orderSchema,
-    onSubmit: async (values) => {
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
-          "POST",
-          JSON.stringify({
-            refUser: authService.getCurrentId(),
-            refPkg: data.id_pkg,
-            datetime: moment().format("DD/MM/YYYY"),
-            paid: Math.round(Math.random()),
-            amount: data.price,
-            startingdate: moment(data.date).format("DD/MM/YYYY"),
-            duration: data.validity,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Qualcosa è andato storto...",
-          text: error.message,
-        });
-      }
-    },
-  });
+  const createOrder = async() =>{
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
+        "POST",
+        JSON.stringify({
+          refUser: authService.getCurrentId(),
+          refPkg: data.id_pkg,
+          datetime: moment().format("DD/MM/YYYY"),
+          paid: (Math.random() < 0.5) ? true : false,
+          amount: data.price,
+          startingdate: moment(data.date).format("DD/MM/YYYY"),
+          duration: data.validity,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(responseData);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Qualcosa è andato storto...",
+        text: error.message,
+      });
+    }
+  }
 
   // console.log(orderData);
 
@@ -129,55 +116,56 @@ const ConfirmationPage = (props) => {
         order to let you complete the purchasing.
       </Segment>
       <div style={{ marginTop: "50px" }}>
-        <div
-          className="display-6 col-md-12 col-12"
-          style={{ fontWeight: "", textAlign: "right" }}
-        >
-          <span style={{ fontWeight: "normal", marginRight: "15px" }}>
+        <div className="row">
+          <div className="col-md-9 col-12"></div>
+          <div className="col-md-3 col-12 display-6 text-center">
             Total Cost: €{data.price}
-          </span>
-          <br />
-          <p
-            style={{
-              fontWeight: "",
-              fontSize: "20px",
-              textAlign: "right",
-              marginRight: "35px",
-            }}
-          >
-            Validity:
-            {" " + data.validity + " months"}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-9 col-12"></div>
+          <div className="col-md-3 col-12 display-6">
             <p
               style={{
-                marginRight: "-10px",
+                fontWeight: "",
+                fontSize: "20px",
+                textAlign: "center",
               }}
             >
-              Starting from:
-              {" " + moment(data.date).format("DD/MM/YYYY")}
+              Validity:
+              {" " + data.validity + " months"}
+              <p>
+                Starting from:
+                {" " + moment(data.date).format("DD/MM/YYYY")}
+              </p>
             </p>
-          </p>
-          <div className="mt-3">
-            {!utente ? (
-              <div>
-                <Button.Group size="huge">
-                  <Button href="/login" color="blue">&nbsp;Log-in&nbsp;</Button>
-                  <Button.Or />
-                  <Button>Sign-up</Button>
-                </Button.Group>
-              </div>
-            ) : (
-              <Button
-                size="huge"
-                color="facebook"
-                type="submit"
-                style={{
-                  marginRight: "25px",
-                }}
-                onClick={orderData.handleSubmit}
-              >
-                Confirm Purchase
-              </Button>
-            )}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-9 col-12"></div>
+          <div className="col-md-3 col-12">
+            <div className="mt-3 text-center">
+              {!utente ? (
+                <div>
+                  <Button.Group size="huge">
+                    <Button href="/login" color="blue">
+                      &nbsp;Log-in&nbsp;
+                    </Button>
+                    <Button.Or />
+                    <Button>Sign-up</Button>
+                  </Button.Group>
+                </div>
+              ) : (
+                <Button
+                  size="huge"
+                  color="facebook"
+                  type="submit"
+                  onClick={createOrder}
+                >
+                  Confirm Purchase
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>

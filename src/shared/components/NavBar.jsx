@@ -76,7 +76,7 @@ const NavBar = () => {
                 style={{ marginLeft: 5 }}
                 href="/login"
               >
-                &nbsp;Login &nbsp;
+                &nbsp;Log-in / Sign-up &nbsp;
               </Nav.Link>
             )}
           </Nav>

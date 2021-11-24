@@ -25,6 +25,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/packagedetails/:pkgID" element={<PackagePage />} />
           <Route path="/confirmationpage" element={<ConfirmationPage />} />
+          <Route path="/unpaidorders" element={<ConfirmationPage />} />
         </Routes>
       );
     } else {
