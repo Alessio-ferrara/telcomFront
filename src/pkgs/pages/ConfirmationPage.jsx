@@ -23,18 +23,20 @@ const ConfirmationPage = (props) => {
   const location = useLocation();
   const { sendRequest, isLoading } = useHttpClient();
   const data = location.state;
+  const navigate = useNavigate();
   const utente = authService.getCurrentToken();
-  
-  const createOrder = async() =>{
+
+  const createOrder = async () => {
     try {
-      const responseData = await sendRequest(
+      const success = Math.random() < 0.5 ? true : false;
+      await sendRequest(
         process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
         "POST",
         JSON.stringify({
           refUser: parseInt(authService.getCurrentId()),
           refPkg: parseInt(data.id_pkg),
           datetime: moment().format("DD/MM/YYYY"),
-          paid: (Math.random() < 0.5) ? true : false,
+          paid: success,
           amount: parseInt(data.price),
           startingDate: moment(data.date).format("DD/MM/YYYY"),
           duration: parseInt(data.validity),
@@ -43,7 +45,20 @@ const ConfirmationPage = (props) => {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData);
+
+      if (success) {
+        Swal.fire({
+          icon: "success",
+          title: "Qualcosa è andato storto...",
+          text: "Payment completed.",
+        }).then(() => navigate("/"));
+      } else if (!success) {
+        Swal.fire({
+          icon: "warning",
+          title: "Qualcosa è andato storto...",
+          text: "Payment not completed. The order is created but you need to finalize the payment.",
+        }).then(() => navigate("/unpaidorders"));
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -51,7 +66,7 @@ const ConfirmationPage = (props) => {
         text: error.message,
       });
     }
-  }
+  };
 
   // console.log(orderData);
 
@@ -142,11 +157,7 @@ const ConfirmationPage = (props) => {
                   </Button.Group>
                 </div>
               ) : (
-                <Button
-                  size="huge"
-                  color="facebook"
-                  onClick={createOrder}
-                >
+                <Button size="huge" color="facebook" onClick={createOrder}>
                   Confirm Purchase
                 </Button>
               )}
