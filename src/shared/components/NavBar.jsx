@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import React from "react";
+// import authService from "../../services/authService"
 
 import {
   faBriefcase,
@@ -60,16 +61,17 @@ const NavBar = () => {
           </Nav.Link> */}
             {user ? (
               <React.Fragment>
-                <Nav.Link
+                {/* <Nav.Link
                   className=" btn btn-info rounded-pill text-dark mr-3 pl-3 pr-3"
                   href="/"
                 >
                   impostazioni
-                </Nav.Link>
+                </Nav.Link> */}
                 <Nav.Link
                   className="right-align btn btn-dark rounded-pill text-light pl-3 pr-3"
                   style={{ marginLeft: 5 }}
                   href="/"
+                  onClick={authService.logout}
                 >
                   Logout{" "}
                 </Nav.Link>

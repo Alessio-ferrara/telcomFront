@@ -38,13 +38,12 @@ const Login = () => {
             "Content-Type" : "application/json"
           }
         )
-        console.log(responseData)
         authService.login(
+          responseData.userID,
           responseData.username,
           responseData.token,
           responseData.type
         );
-
       } catch(error) {
         Swal.fire({
           icon: "error",

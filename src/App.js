@@ -2,7 +2,7 @@ import "./App.css";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import authService from "./services/authService";
-import 'semantic-ui-css/semantic.min.css';
+import "semantic-ui-css/semantic.min.css";
 
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/Footer";
@@ -10,10 +10,6 @@ import Login from "./auth/pages/Login";
 import LandingPage from "./homepage/pages/LandingPage";
 import PackagePage from "./pkgs/pages/PackagePage";
 import ConfirmationPage from "./pkgs/pages/ConfirmationPage";
-
-
-
-
 
 function App() {
   const user = authService.getCurrentRuolo();
@@ -24,34 +20,36 @@ function App() {
     if (user === "User") {
       routes = (
         <Routes>
-          <Route path="/" element={<LandingPage/>}></Route>
+          <Route path="/" element={<LandingPage />}></Route>
+          <Route
+            path="/packagedetails/:pkgID"
+            element={<PackagePage />}
+          ></Route>
+          <Route
+            path="/confirmationpage"
+            element={<ConfirmationPage />}
+          ></Route>
         </Routes>
       );
     } else {
-      routes = (
-        <Routes>
-
-        </Routes>
-      );
+      routes = <Routes></Routes>;
     }
   } else {
     routes = (
       <Routes>
         {/* we route to the Login.jsx in auth/pages */}
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/" element={<LandingPage/>}></Route>
-        <Route path="/packagedetails/:pkgID" element={<PackagePage/>}></Route>
-        <Route path="/confirmationpage" element={<ConfirmationPage/>}></Route>
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/packagedetails/:pkgID" element={<PackagePage />}></Route>
+        <Route path="/confirmationpage" element={<ConfirmationPage />}></Route>
       </Routes>
     );
   }
   return (
     <Router>
-      <NavBar/>
-      <main>{routes}
-      </main>
-      <Footer/>
+      <NavBar />
+      <main>{routes}</main>
+      <Footer />
     </Router>
   );
 }
