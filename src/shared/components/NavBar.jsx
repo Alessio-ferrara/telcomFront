@@ -13,10 +13,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import authService from "../../services/authService";
+import { useNavigate } from "react-router";
 
 const NavBar = () => {
   // var user = JSON.parse(localStorage.getItem('user'));
   const user = authService.getCurrentUsername();
+  const navigate = useNavigate()
 
   return (
     <Navbar bg="blue" expand="lg">
@@ -28,7 +30,8 @@ const NavBar = () => {
             height="35"
             src="/logo.jpeg"
             className="d-inline-block align-end"
-          />{"Telcom"}
+          />
+          {"Telcom"}
         </Navbar.Brand>{" "}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -69,7 +72,10 @@ const NavBar = () => {
                 <Nav.Link
                   className="right-align btn btn-dark rounded-pill text-light pl-3 pr-3"
                   style={{ marginLeft: 5 }}
-                  href="/"
+                  onClick={() => {
+                    authService.logout();
+                    navigate(0);
+                  }}
                 >
                   Logout{" "}
                 </Nav.Link>
@@ -80,7 +86,7 @@ const NavBar = () => {
                 style={{ marginLeft: 5 }}
                 href="/login"
               >
-                &nbsp;Login{" "}&nbsp;
+                &nbsp;Login &nbsp;
               </Nav.Link>
             )}
           </Nav>

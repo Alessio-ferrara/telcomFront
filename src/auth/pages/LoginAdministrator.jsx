@@ -14,10 +14,9 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().required(),
 });
 
-const Login = () => {
+const LoginAdministrator = () => {
   const { sendRequest, isLoading } = useHttpClient();
-  const navigate = useNavigate()
-  const [recupera, setRecupera] = useState();
+  const navigate = useNavigate();
 
   const loginData = useFormik({
     initialValues: {
@@ -28,7 +27,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_JAVA_BASE_URL + "/auth/login",
+          process.env.REACT_APP_JAVA_BASE_URL + "/auth/loginEmployee",
           "POST",
           JSON.stringify({
             username: values.username,
@@ -43,8 +42,9 @@ const Login = () => {
           responseData.token,
           responseData.type
         );
-        navigate("/")
-        navigate(0)   
+        navigate('/')
+        navigate(0)
+        
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -61,7 +61,7 @@ const Login = () => {
           <Card color="blue" centered fluid>
             <Card.Header>
               <Header as="h2" className="text-center my-3">
-                Login
+                Administrator login
               </Header>
             </Card.Header>
             <Card.Content>
@@ -87,24 +87,6 @@ const Login = () => {
                     loginData.errors.password && loginData.touched.password
                   }
                 />
-                <div className="row">
-                  <label
-                    className="col-12 mb-2"
-                    type="button"
-                    style={{ color: "gray", fontSize: "70%" }}
-                    onClick={() => setRecupera(true)}
-                  >
-                    Password dimenticata?
-                  </label>
-                  <label
-                    type="button"
-                    style={{ color: "gray", fontSize: "70%" }}
-                    onClick={() => navigate("/loginadministrator")}
-                  >
-                    Login as administrator
-                  </label>
-                </div>
-
                 <Button
                   type="submit"
                   color="blue"
@@ -122,4 +104,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginAdministrator;
