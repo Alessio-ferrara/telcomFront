@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import moment from "moment";
 
 import {
@@ -7,12 +7,13 @@ import {
   faAngleRight,
   faUsers,
   faShoppingBag,
+  faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card , Button} from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 const ListaOrdini = (props) => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   if (props.orders.length === 0) {
     return (
@@ -38,36 +39,60 @@ const ListaOrdini = (props) => {
                   fluid
                   className="mb-4"
                   color="red"
-                   header={"Order No. " + ord.orderID}
-                   meta={"Starting from "+  moment(ord.startingdate).format("DD/MM/YYYY") +",  and valid for " + ord.duration+" months"}
-                   description= {<div>
-                  <p>
-                    {"Package : " + ord.pkg.name}
-                    <span className="text-muted">
-                    {ord.pkg.description}
-                    </span>
-                  </p>
-                  <p>
-                    {"Total Amount: €" + ord.amount  }
-                  </p>
-                  <Button
-                          
-                          color="facebook"
+                  header={"Order No. " + ord.orderID}
+                  description={
+                    <div className="row mt-3">
+                      <div className="col-md-8 col-12">
+                        <p>
+                          {ord.pkg.name}
+                          <p className="text-muted">{ord.pkg.description}</p>
+                          <p>
+                            {"Starting from " +
+                              moment(
+                                ord.startingDate,
+                                "YYYY-MM-DDTHH:mm"
+                              ).format("DD/MM/YYYY") +
+                              ",  and valid for " +
+                              ord.duration +
+                              " months"}
+                          </p>
+                        </p>
+                        <p>{"Total Amount: €" + ord.amount}</p>
+                      </div>
+                      <div className="col-md-4 col-12 text-center mb-3">
+                        <Button
+                          color="google plus"
                           size="big"
                           onClick={() => {
+                            let array = [];
+                            for (
+                              let i = 0;
+                              i < ord.orderPackageOptionals.length;
+                              i++
+                            ) {
+                              array.push(
+                                ord.orderPackageOptionals[i].optionalService
+                              );
+                            }
+                            ord.pkg.optionals = array;
+                            ord.pkg.price = ord.amount;
+                            ord.pkg.validity = ord.duration;
+                            ord.pkg.date = moment(
+                              ord.startingDate,
+                              "YYYY-MM-DDTHH:mm"
+                            ).format();
                             navigate("/confirmationpage", {
-                              state: ord,
-
+                              state: ord.pkg,
                             });
                           }}
                         >
-                          <FontAwesomeIcon icon={faShoppingBag} />
-                          &nbsp; Purchase
+                          <FontAwesomeIcon icon={faCartPlus} />
+                          &nbsp; Complete Purchase
                         </Button>
-                   </div>}
-                >
-                  
-                  </Card>
+                      </div>
+                    </div>
+                  }
+                ></Card>
               ))}
             </Card.Group>
           </div>

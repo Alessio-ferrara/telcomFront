@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, Redirect } from "react-router-dom";
 import authService from "./services/authService";
 import "semantic-ui-css/semantic.min.css";
 
@@ -38,12 +38,14 @@ function App() {
   } else {
     routes = (
       <Routes>
-        {/* we route to the Login.jsx in auth/pages */}
         <Route path="/login" element={<Login />} />
         <Route path="/loginadministrator" element={<LoginAdministrator />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/packagedetails/:pkgID" element={<PackagePage />} />
         <Route path="/confirmationpage" element={<ConfirmationPage />} />
+        {/* DEFAULT RENDERING TO THE LANDING PAGE IF WE ACCESS TO A FORBIDDEN */}
+        <Route path="*" element={<LandingPage />} />
+
       </Routes>
     );
   }

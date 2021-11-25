@@ -30,7 +30,9 @@ const NavBar = () => {
               {/* <FontAwesomeIcon className="fa-lg" icon={faHome} /> */}
               {"Homepage"}
             </Nav.Link>
+            {user && (
             <Nav.Link href="/unpaidorders">Unpaid Orders</Nav.Link>
+            )}
             {/* <Nav.Link href="/">Orders History</Nav.Link> */}
 
             {/* <Nav.Link href="">Link</Nav.Link> */}
@@ -60,7 +62,7 @@ const NavBar = () => {
                   impostazioni
                 </Nav.Link> */}
                 <Nav.Link
-                  className="right-align btn btn-dark rounded-pill text-light pl-3 pr-3"
+                  className="right-align btn btn-dark rounded-end text-light pl-3 pr-3"
                   style={{ marginLeft: 5 }}
                   onClick={() => {
                     authService.logout();
@@ -74,6 +76,12 @@ const NavBar = () => {
               <Nav.Link
                 className="right-align btn btn-primary rounded-pill text-light pl-3 pr-3"
                 style={{ marginLeft: 5 }}
+                // style={{ marginLeft: 5 , background: "#A770EF",  /* fallback for old browsers */
+                //   background: "-webkit-linear-gradient(to right, #eaafc8, #654ea3)" ,  /* Chrome 10-25, Safari 5.1-6 */
+                //   background: "linear-gradient(to right, #eaafc8, #654ea3)", /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                //   color: "#fff",
+                //   border: "0px solid black"
+                //   }}
                 href="/login"
               >
                 &nbsp;Log-in / Sign-up &nbsp;
