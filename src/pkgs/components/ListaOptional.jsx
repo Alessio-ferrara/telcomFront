@@ -3,7 +3,7 @@ import { Checkbox } from "semantic-ui-react";
 import ServizioItem from "./ServizioItem";
 
 const ListaOptional = (props) => {
-  // console.log(props.optionals);
+  // (props.optionals);
   if (props.optionals.length > 0) {
     return (
       <React.Fragment>

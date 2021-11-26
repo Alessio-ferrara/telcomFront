@@ -9,7 +9,7 @@ const LandingPage = () => {
   //query al database per ottenere i pacchetti
   const { sendRequest, isLoading } = useHttpClient();
   const [pacchetti, setPacchetti] = useState();
-  // console.log(process.env.REACT_APP_FRONT_URL);
+
 
   useEffect(() => {
     const getPacchetti = async () => {

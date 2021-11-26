@@ -10,9 +10,10 @@ import Login from "./auth/pages/Login";
 import LandingPage from "./homepage/pages/LandingPage";
 import PackagePage from "./pkgs/pages/PackagePage";
 import ConfirmationPage from "./pkgs/pages/ConfirmationPage";
-import HomePageEmp from "./employee/homepage/HomePageEmp";
+import HomePageEmp from "./employee/homepage/pages/HomePageEmp"
 import LoginAdministrator from "./auth/pages/LoginAdministrator";
 import UnpaidOrders from "./orders/pages/UnpaidOrders.jsx";
+import Registration from "./auth/pages/Registration";
 function App() {
   const user = authService.getCurrentRuolo();
 
@@ -39,6 +40,7 @@ function App() {
     routes = (
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Registration/>} />
         <Route path="/loginadministrator" element={<LoginAdministrator />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/packagedetails/:pkgID" element={<PackagePage />} />

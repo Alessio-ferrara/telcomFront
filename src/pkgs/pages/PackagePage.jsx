@@ -76,7 +76,7 @@ const PackagePage = () => {
   const AddOptional = (id, montlycost, name) => {
     let array = confirmationData.values.optionals;
     let found = 0;
-    // console.log(name);
+
     for (let i = 0; i < array.length; i++) {
       if (array[i].id == id) {
         array.splice(i, 1);
@@ -90,7 +90,7 @@ const PackagePage = () => {
     }
 
     confirmationData.setFieldValue("optionals", array);
-    // console.log(confirmationData.values);
+
   };
   useEffect(() => {
     const getInfoPacchetto = async () => {
@@ -131,7 +131,7 @@ const PackagePage = () => {
           "GET",
           null
         );
-        // console.log(response);
+
         setOptionals(response);
       } catch (error) {
         Swal.fire({

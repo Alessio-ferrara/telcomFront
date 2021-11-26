@@ -11,7 +11,7 @@ const UnpaidOrders = () => {
   const { sendRequest, isLoading } = useHttpClient();
   const [ordini, setOrdini] = useState();
   const id = parseInt(authService.getCurrentId());
-  // console.log(process.env.REACT_APP_FRONT_URL);
+
 
   useEffect(() => {
     const getOrdini = async () => {
@@ -21,7 +21,7 @@ const UnpaidOrders = () => {
           "GET",
             null
         );
-        console.log(response)
+
         setOrdini(response);
       } catch (error) {
         Swal.fire({

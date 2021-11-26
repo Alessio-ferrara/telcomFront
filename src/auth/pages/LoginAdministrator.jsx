@@ -38,6 +38,7 @@ const LoginAdministrator = () => {
           }
         );
         authService.login(
+          responseData.id,
           responseData.username,
           responseData.token,
           responseData.type

@@ -68,8 +68,6 @@ const ConfirmationPage = (props) => {
     }
   };
 
-  // console.log(orderData);
-
   return (
     <div className="container mt-3">
       <div className="display-6 col-6">
@@ -149,11 +147,28 @@ const ConfirmationPage = (props) => {
               {!utente ? (
                 <div>
                   <Button.Group size="huge">
-                    <Button href="/login" color="blue">
+                    <Button
+                      color="blue"
+                      onClick={() => {
+                        navigate("/login", {
+                          state: { info: data },
+                          from: "/confirmationpage",
+                        });
+                      }}
+                    >
                       &nbsp;Log-in&nbsp;
                     </Button>
                     <Button.Or />
-                    <Button>Sign-up</Button>
+                    <Button
+                      onClick={() => {
+                        navigate("/signup", {
+                          state: { info: data },
+                          from: "/confirmationpage",
+                        });
+                      }}
+                    >
+                      Sign-up
+                    </Button>
                   </Button.Group>
                 </div>
               ) : (

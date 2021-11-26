@@ -9,12 +9,13 @@ import { useHttpClient } from "../../util/http-hook";
 import authService from "../../services/authService";
 import { useLocation, useNavigate } from "react-router";
 
-const loginSchema = Yup.object().shape({
+const registrationSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required(),
+  email: Yup.string().required(),
 });
 
-const Login = () => {
+const Registration = () => {
   const { sendRequest, isLoading } = useHttpClient();
   const location = useLocation();
   const data = location.state;
@@ -24,27 +25,30 @@ const Login = () => {
     initialValues: {
       username: "",
       password: "",
+      email: "",
     },
-    validationSchema: loginSchema,
+    validationSchema: registrationSchema,
     onSubmit: async (values) => {
       try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_JAVA_BASE_URL + "/auth/login",
+          process.env.REACT_APP_JAVA_BASE_URL + "/auth/registration",
           "POST",
           JSON.stringify({
             username: values.username,
             password: values.password,
+            email: values.email,
           }),
           {
             "Content-Type": "application/json",
           }
         );
+        
         authService.login(
           responseData.userID,
           responseData.username,
           responseData.token,
           responseData.type
-        );
+        ); 
         if (data && data.from) {
           navigate(data.from, {
             state: data.info,
@@ -54,6 +58,7 @@ const Login = () => {
           navigate("/");
           navigate(0);
         }
+        
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -70,21 +75,34 @@ const Login = () => {
           <Card color="blue" centered fluid>
             <Card.Header>
               <Header as="h2" className="text-center my-3">
-                Login
+                Sign up
               </Header>
             </Card.Header>
             <Card.Content>
               <Form size="large">
-                <Form.Input
-                  label="Username:"
-                  id="username"
-                  value={loginData.values.username}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.username && loginData.touched.username
-                  }
-                />
+                <Form.Group widths="equal" >
+                  <Form.Input
+                    label="Username:"
+                    id="username"
+                    value={loginData.values.username}
+                    fluid
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={
+                      loginData.errors.username && loginData.touched.username
+                    }
+                  />
+                  <Form.Input
+                    label="Email:"
+                    id="email"
+                    fluid
+                    value={loginData.values.email}
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={loginData.errors.email && loginData.touched.email}
+                  />
+                </Form.Group>
+
                 <Form.Input
                   label="Password:"
                   id="password"
@@ -96,27 +114,6 @@ const Login = () => {
                     loginData.errors.password && loginData.touched.password
                   }
                 />
-                <div className="row">
-                  <div className="col-12 mb-2" style={{ fontSize: "95%" }}>
-                    <label style={{ color: "gray", marginRight:"3px" }}>New to Telcom?</label>
-                    <span
-                      type="button"
-                      onClick={() => navigate("/signup")}
-                      style={{ fontWeight: "bold" }}
-                    >
-                      {" "}
-                      Sign up now!{" "}
-                    </span>
-                  </div>
-
-                  <label
-                    type="button"
-                    style={{ color: "gray", fontSize: "95%" }}
-                    onClick={() => navigate("/loginadministrator")}
-                  >
-                    Login as administrator
-                  </label>
-                </div>
 
                 <Button
                   type="submit"
@@ -124,7 +121,7 @@ const Login = () => {
                   floated="right"
                   onClick={loginData.handleSubmit}
                 >
-                  <Icon name="sign in" /> Accedi
+                  <Icon name="signup" /> Sign-up
                 </Button>
               </Form>
             </Card.Content>
@@ -135,4 +132,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Registration;
