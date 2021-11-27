@@ -40,6 +40,7 @@ const ConfirmationPage = (props) => {
           amount: parseInt(data.price),
           startingDate: moment(data.date).format("DD/MM/YYYY"),
           duration: parseInt(data.validity),
+          optionals: data.optionals
         }),
         {
           "Content-Type": "application/json",

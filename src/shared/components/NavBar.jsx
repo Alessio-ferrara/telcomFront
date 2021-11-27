@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 const NavBar = () => {
   // var user = JSON.parse(localStorage.getItem('user'));
-  const user = authService.getCurrentUsername();
+  const user = authService.getCurrentRuolo();
   const navigate = useNavigate()
 
   return (
@@ -30,9 +30,14 @@ const NavBar = () => {
               {/* <FontAwesomeIcon className="fa-lg" icon={faHome} /> */}
               {"Homepage"}
             </Nav.Link>
-            {user && (
+            {user === 'User' && (
             <Nav.Link href="/unpaidorders">Unpaid Orders</Nav.Link>
             )}
+            {user === 'Emp' && (
+              <Nav.Link href="/optionals">Optionals</Nav.Link>
+            )}
+
+            {}
             {/* <Nav.Link href="/">Orders History</Nav.Link> */}
 
             {/* <Nav.Link href="">Link</Nav.Link> */}
