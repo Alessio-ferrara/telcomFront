@@ -1,9 +1,9 @@
-import { faCube, faDollarSign, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faCube, faDollarSign, faEuroSign, faKey } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
 import React from "react";
 
-import { Button, Form, Modal } from "semantic-ui-react";
+import { Button, Form, Icon, Modal } from "semantic-ui-react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useHttpClient } from "../../../util/http-hook";
@@ -42,7 +42,6 @@ const AggiungiValidity = (props) => {
     >
       <Modal.Header className="text-center">
         Add new validity and price{" "}
-        <FontAwesomeIcon className="ml-2" icon={faDollarSign} />
       </Modal.Header>
       <Modal.Content scrolling>
         <Modal.Description>
@@ -62,6 +61,7 @@ const AggiungiValidity = (props) => {
               <Form.Input
                 label="Amount"
                 id="amount"
+                icon={<Icon name="euro sign"/>}
                 fluid
                 value={validityData.values.amount}
                 error={

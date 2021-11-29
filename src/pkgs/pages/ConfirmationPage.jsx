@@ -2,20 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useHttpClient } from "../../util/http-hook";
-import {
-  faCartPlus,
-  faShoppingCart,
-  faShoppingBag,
-  faBroadcastTower,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useFormik } from "formik";
-import { Form, Button, Label, Header, Segment } from "semantic-ui-react";
+import {Button, Label, Segment } from "semantic-ui-react";
 import Swal from "sweetalert2";
-import * as Yup from "yup";
-import ListaServizi from "../components/ListaServizi";
-import ListaOptional from "../components/ListaOptional";
+
+
 import authService from "../../services/authService";
 import moment from "moment";
 

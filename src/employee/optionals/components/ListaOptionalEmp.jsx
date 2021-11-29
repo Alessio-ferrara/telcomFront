@@ -8,7 +8,7 @@ const ListaOptionalEmp = (props) => {
         <div className="my-2 mx-3">
           <div className="row">
             {props.optionals.map((optional) => (
-              <div className="col-md-3 p-0">
+              <div className="col-md-3 p-0 mb-3">
                 <Label tag color="blue">
                   {optional.name}
                   <Label.Detail>{optional.montlyCost} €</Label.Detail>

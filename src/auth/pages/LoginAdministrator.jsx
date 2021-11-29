@@ -43,9 +43,8 @@ const LoginAdministrator = () => {
           responseData.token,
           responseData.type
         );
-        navigate('/')
-        navigate(0)
-        
+        navigate("/");
+        navigate(0);
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -57,50 +56,52 @@ const LoginAdministrator = () => {
   });
   return (
     <React.Fragment>
-      {!isLoading && (
-        <div style={{ margin: "10%" }}>
-          <Card color="blue" centered fluid>
-            <Card.Header>
-              <Header as="h2" className="text-center my-3">
-                Administrator login
-              </Header>
-            </Card.Header>
-            <Card.Content>
-              <Form size="large">
-                <Form.Input
-                  label="Username:"
-                  id="username"
-                  value={loginData.values.username}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.username && loginData.touched.username
-                  }
-                />
-                <Form.Input
-                  label="Password:"
-                  id="password"
-                  type="password"
-                  value={loginData.values.password}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.password && loginData.touched.password
-                  }
-                />
-                <Button
-                  type="submit"
-                  color="blue"
-                  floated="right"
-                  onClick={loginData.handleSubmit}
-                >
-                  <Icon name="sign in" /> Accedi
-                </Button>
-              </Form>
-            </Card.Content>
-          </Card>
-        </div>
-      )}
+      <div className="container mt-2">
+        {!isLoading && (
+          <div style={{ margin: "10%" }}>
+            <Card color="blue" centered fluid>
+              <Card.Header>
+                <Header as="h2" className="text-center my-3">
+                  Administrator login
+                </Header>
+              </Card.Header>
+              <Card.Content>
+                <Form size="large">
+                  <Form.Input
+                    label="Username:"
+                    id="username"
+                    value={loginData.values.username}
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={
+                      loginData.errors.username && loginData.touched.username
+                    }
+                  />
+                  <Form.Input
+                    label="Password:"
+                    id="password"
+                    type="password"
+                    value={loginData.values.password}
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={
+                      loginData.errors.password && loginData.touched.password
+                    }
+                  />
+                  <Button
+                    type="submit"
+                    color="blue"
+                    floated="right"
+                    onClick={loginData.handleSubmit}
+                  >
+                    <Icon name="sign in" /> Accedi
+                  </Button>
+                </Form>
+              </Card.Content>
+            </Card>
+          </div>
+        )}
+      </div>
     </React.Fragment>
   );
 };

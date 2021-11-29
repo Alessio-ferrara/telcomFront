@@ -39,7 +39,6 @@ const HomePageEmp = () => {
     setServizi(array);
   };
 
-
   useEffect(() => {
     const getServizi = async () => {
       try {
@@ -97,7 +96,6 @@ const HomePageEmp = () => {
     },
   });
 
-
   const addValidityPeriod = (validity) => {
     let array = validityPeriods;
     array.push(validity);
@@ -123,97 +121,101 @@ const HomePageEmp = () => {
 
   return (
     <React.Fragment>
-      {newService && (
-        <AggiungiServizio handleClose={handleClose} addService={addService} />
-      )}
-      {newValidityPeriod && (
-        <AggiungiValidity
-          handleClose={handleCloseValidity}
-          addValidity={addValidityPeriod}
-        />
-      )}
-      <div style={{ margin: "10%" }}>
-        <Card color="blue" centered fluid>
-          <Card.Header>
-            <Header as="h2" className="text-center my-3">
-              Add new package service
-            </Header>
-          </Card.Header>
-          <Card.Content>
-            <Form>
-              <Form.Group widths="equal">
-                {" "}
-                <Form.Input
-                  label="Name:"
-                  id="name"
-                  value={pkgData.values.name}
-                  onChange={pkgData.handleChange}
-                  onBlur={pkgData.handleBlur}
-                  error={pkgData.errors.name && pkgData.touched.name}
-                />
-                <Form.Input
-                  label="Description:"
-                  id="description"
-                  value={pkgData.values.description}
-                  onChange={pkgData.handleChange}
-                  onBlur={pkgData.handleBlur}
-                  error={
-                    pkgData.errors.description && pkgData.touched.description
-                  }
-                />
-              </Form.Group>
+      <div className="container mt-2">
+        {newService && (
+          <AggiungiServizio handleClose={handleClose} addService={addService} />
+        )}
+        {newValidityPeriod && (
+          <AggiungiValidity
+            handleClose={handleCloseValidity}
+            addValidity={addValidityPeriod}
+          />
+        )}
+        <div style={{ margin: "10%" }}>
+          <Card color="blue" centered fluid>
+            <Card.Header>
+              <Header as="h2" className="text-center my-3">
+                Add new package service
+              </Header>
+            </Card.Header>
+            <Card.Content>
+              <Form>
+                <Form.Group widths="equal">
+                  {" "}
+                  <Form.Input
+                    label="Name:"
+                    id="name"
+                    value={pkgData.values.name}
+                    onChange={pkgData.handleChange}
+                    onBlur={pkgData.handleBlur}
+                    error={pkgData.errors.name && pkgData.touched.name}
+                  />
+                  <Form.Input
+                    label="Description:"
+                    id="description"
+                    value={pkgData.values.description}
+                    onChange={pkgData.handleChange}
+                    onBlur={pkgData.handleBlur}
+                    error={
+                      pkgData.errors.description && pkgData.touched.description
+                    }
+                  />
+                </Form.Group>
 
-              <Label color="blue" tag>
-                Services
-              </Label>
-              <Button
-                className="mt-md-0 mt-3 col-lg-2 col-md-4  col-12"
-                icon
-                labelPosition="left"
-                size="mini"
-                floated="right"
-                color="green"
-                onClick={() => setNewService(true)}
-              >
-                <Icon name="add" />
-                Add new service
-              </Button>
-              {servizi && !isLoading && (
-                <ListaServiziEmp
-                  servizi={servizi}
-                  clickService={clickService}
-                />
-              )}
-              <div className="mb-3">
                 <Label color="blue" tag>
-                  Validity and price
+                  Services
                 </Label>
                 <Button
-                  className="mt-md-0 mt-3 mb-md-0 mb-3 col-lg-2 col-md-4 col-12"
+                  className="mt-md-0 mt-3 col-lg-2 col-md-4  col-12"
                   icon
                   labelPosition="left"
                   size="mini"
                   floated="right"
                   color="green"
-                  onClick={() => setNewValidityPeriod(true)}
+                  onClick={() => setNewService(true)}
                 >
                   <Icon name="add" />
-                  Add validity
+                  Add new service
                 </Button>
-              </div>
+                {servizi && !isLoading && (
+                  <ListaServiziEmp
+                    servizi={servizi}
+                    clickService={clickService}
+                  />
+                )}
+                <div className="mb-3">
+                  <Label color="blue" tag>
+                    Validity and price
+                  </Label>
+                  <Button
+                    className="mt-md-0 mt-3 mb-md-0 mb-3 col-lg-2 col-md-4 col-12"
+                    icon
+                    labelPosition="left"
+                    size="mini"
+                    floated="right"
+                    color="green"
+                    onClick={() => setNewValidityPeriod(true)}
+                  >
+                    <Icon name="add" />
+                    Add validity
+                  </Button>
+                </div>
 
-              {validityPeriods && <ListaValidity validity={validityPeriods} />}
-              <Button
-                type="submit"
-                color="blue"
-                floated="right"
-                onClick={pkgData.handleSubmit}
-              >
-                <Icon name="sign in" /> Insert
-              </Button>
-            </Form>
-          </Card.Content>
-        </Card>
+                {validityPeriods && (
+                  <ListaValidity validity={validityPeriods} />
+                )}
+                <Button
+                  type="submit"
+                  color="blue"
+                  floated="right"
+                  onClick={pkgData.handleSubmit}
+                >
+                  <Icon name="add" /> Insert
+                </Button>
+              </Form>
+            </Card.Content>
+          </Card>
+        </div>
       </div>
     </React.Fragment>
   );

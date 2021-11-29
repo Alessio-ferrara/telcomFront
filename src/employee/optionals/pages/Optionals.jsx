@@ -51,8 +51,8 @@ const Optionals = () => {
         />
       )}
       {/* usare un component in cui importare i dati per formattarli nel frontend */}
-      <div className="jumbotron">
-        <div className="container mt-2">
+      <div className="jumbotron mt-2">
+        <div className="container ">
           <Button
             className="mt-md-0 mt-3 mb-3 col-lg-2 col-md-4 col-12"
             icon

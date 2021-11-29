@@ -65,72 +65,76 @@ const Login = () => {
   });
   return (
     <React.Fragment>
-      {!isLoading && (
-        <div style={{ margin: "10%" }}>
-          <Card color="blue" centered fluid>
-            <Card.Header>
-              <Header as="h2" className="text-center my-3">
-                Login
-              </Header>
-            </Card.Header>
-            <Card.Content>
-              <Form size="large">
-                <Form.Input
-                  label="Username:"
-                  id="username"
-                  value={loginData.values.username}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.username && loginData.touched.username
-                  }
-                />
-                <Form.Input
-                  label="Password:"
-                  id="password"
-                  type="password"
-                  value={loginData.values.password}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.password && loginData.touched.password
-                  }
-                />
-                <div className="row">
-                  <div className="col-12 mb-2" style={{ fontSize: "95%" }}>
-                    <label style={{ color: "gray", marginRight:"3px" }}>New to Telcom?</label>
-                    <span
+      <div className="container mt-2">
+        {!isLoading && (
+          <div style={{ margin: "10%" }}>
+            <Card color="blue" centered fluid>
+              <Card.Header>
+                <Header as="h2" className="text-center my-3">
+                  Login
+                </Header>
+              </Card.Header>
+              <Card.Content>
+                <Form size="large">
+                  <Form.Input
+                    label="Username:"
+                    id="username"
+                    value={loginData.values.username}
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={
+                      loginData.errors.username && loginData.touched.username
+                    }
+                  />
+                  <Form.Input
+                    label="Password:"
+                    id="password"
+                    type="password"
+                    value={loginData.values.password}
+                    onChange={loginData.handleChange}
+                    onBlur={loginData.handleBlur}
+                    error={
+                      loginData.errors.password && loginData.touched.password
+                    }
+                  />
+                  <div className="row">
+                    <div className="col-12 mb-2" style={{ fontSize: "95%" }}>
+                      <label style={{ color: "gray", marginRight: "3px" }}>
+                        New to Telcom?
+                      </label>
+                      <span
+                        type="button"
+                        onClick={() => navigate("/signup")}
+                        style={{ fontWeight: "bold" }}
+                      >
+                        {" "}
+                        Sign up now!{" "}
+                      </span>
+                    </div>
+
+                    <label
                       type="button"
-                      onClick={() => navigate("/signup")}
-                      style={{ fontWeight: "bold" }}
+                      style={{ color: "gray", fontSize: "95%" }}
+                      onClick={() => navigate("/loginadministrator")}
                     >
-                      {" "}
-                      Sign up now!{" "}
-                    </span>
+                      Login as administrator
+                    </label>
                   </div>
 
-                  <label
-                    type="button"
-                    style={{ color: "gray", fontSize: "95%" }}
-                    onClick={() => navigate("/loginadministrator")}
+                  <Button
+                    type="submit"
+                    color="blue"
+                    floated="right"
+                    onClick={loginData.handleSubmit}
                   >
-                    Login as administrator
-                  </label>
-                </div>
-
-                <Button
-                  type="submit"
-                  color="blue"
-                  floated="right"
-                  onClick={loginData.handleSubmit}
-                >
-                  <Icon name="sign in" /> Accedi
-                </Button>
-              </Form>
-            </Card.Content>
-          </Card>
-        </div>
-      )}
+                    <Icon name="sign in" /> Accedi
+                  </Button>
+                </Form>
+              </Card.Content>
+            </Card>
+          </div>
+        )}
+      </div>
     </React.Fragment>
   );
 };

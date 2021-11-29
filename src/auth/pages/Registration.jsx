@@ -42,13 +42,13 @@ const Registration = () => {
             "Content-Type": "application/json",
           }
         );
-        
+
         authService.login(
           responseData.userID,
           responseData.username,
           responseData.token,
           responseData.type
-        ); 
+        );
         if (data && data.from) {
           navigate(data.from, {
             state: data.info,
@@ -58,7 +58,6 @@ const Registration = () => {
           navigate("/");
           navigate(0);
         }
-        
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -70,64 +69,66 @@ const Registration = () => {
   });
   return (
     <React.Fragment>
-      {!isLoading && (
-        <div style={{ margin: "10%" }}>
-          <Card color="blue" centered fluid>
-            <Card.Header>
-              <Header as="h2" className="text-center my-3">
-                Sign up
-              </Header>
-            </Card.Header>
-            <Card.Content>
-              <Form size="large">
-                <Form.Group widths="equal" >
+      <div className="container mt-2">
+        {!isLoading && (
+          <div style={{ margin: "10%" }}>
+            <Card color="blue" centered fluid>
+              <Card.Header>
+                <Header as="h2" className="text-center my-3">
+                  Sign up
+                </Header>
+              </Card.Header>
+              <Card.Content>
+                <Form size="large">
+                  <Form.Group widths="equal">
+                    <Form.Input
+                      label="Username:"
+                      id="username"
+                      value={loginData.values.username}
+                      fluid
+                      onChange={loginData.handleChange}
+                      onBlur={loginData.handleBlur}
+                      error={
+                        loginData.errors.username && loginData.touched.username
+                      }
+                    />
+                    <Form.Input
+                      label="Email:"
+                      id="email"
+                      fluid
+                      value={loginData.values.email}
+                      onChange={loginData.handleChange}
+                      onBlur={loginData.handleBlur}
+                      error={loginData.errors.email && loginData.touched.email}
+                    />
+                  </Form.Group>
+
                   <Form.Input
-                    label="Username:"
-                    id="username"
-                    value={loginData.values.username}
-                    fluid
+                    label="Password:"
+                    id="password"
+                    type="password"
+                    value={loginData.values.password}
                     onChange={loginData.handleChange}
                     onBlur={loginData.handleBlur}
                     error={
-                      loginData.errors.username && loginData.touched.username
+                      loginData.errors.password && loginData.touched.password
                     }
                   />
-                  <Form.Input
-                    label="Email:"
-                    id="email"
-                    fluid
-                    value={loginData.values.email}
-                    onChange={loginData.handleChange}
-                    onBlur={loginData.handleBlur}
-                    error={loginData.errors.email && loginData.touched.email}
-                  />
-                </Form.Group>
 
-                <Form.Input
-                  label="Password:"
-                  id="password"
-                  type="password"
-                  value={loginData.values.password}
-                  onChange={loginData.handleChange}
-                  onBlur={loginData.handleBlur}
-                  error={
-                    loginData.errors.password && loginData.touched.password
-                  }
-                />
-
-                <Button
-                  type="submit"
-                  color="blue"
-                  floated="right"
-                  onClick={loginData.handleSubmit}
-                >
-                  <Icon name="signup" /> Sign-up
-                </Button>
-              </Form>
-            </Card.Content>
-          </Card>
-        </div>
-      )}
+                  <Button
+                    type="submit"
+                    color="blue"
+                    floated="right"
+                    onClick={loginData.handleSubmit}
+                  >
+                    <Icon name="signup" /> Sign-up
+                  </Button>
+                </Form>
+              </Card.Content>
+            </Card>
+          </div>
+        )}
+      </div>
     </React.Fragment>
   );
 };

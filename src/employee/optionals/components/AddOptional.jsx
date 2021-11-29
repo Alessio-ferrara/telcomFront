@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
 import React from "react";
 
-import { Button, Form, Modal } from "semantic-ui-react";
+import { Button, Form, Icon, Modal } from "semantic-ui-react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useHttpClient } from "../../../util/http-hook";
@@ -80,6 +80,7 @@ const AddOptional = (props) => {
                   optionalData.errors.montly_cost &&
                   optionalData.touched.montly_cost
                 }
+                icon={<Icon name="euro sign"/>}
                 onChange={optionalData.handleChange}
                 onBlur={optionalData.handleBlur}
               />

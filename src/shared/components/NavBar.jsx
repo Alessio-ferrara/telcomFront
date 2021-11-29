@@ -1,14 +1,43 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import authService from "../../services/authService"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import authService from "../../services/authService";
 import { useNavigate } from "react-router";
+import { useHttpClient } from "../../util/http-hook";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
-  // var user = JSON.parse(localStorage.getItem('user'));
+  const { sendRequest, isLoading } = useHttpClient();
   const user = authService.getCurrentRuolo();
-  const navigate = useNavigate()
+  const [nOrdersUnpaid, setnOrdersUnpaid] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getOrdini = async () => {
+      if (user) {
+        try {
+          const response = await sendRequest(
+            process.env.REACT_APP_JAVA_BASE_URL +
+              "/order/unpaidOrders/" +
+              authService.getCurrentId(),
+            "GET",
+            null
+          );
+          setnOrdersUnpaid(response.length);
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Qualcosa è andato storto...",
+            text: error.message,
+          });
+        }
+      }
+    };
+    getOrdini();
+  }, [sendRequest]);
+
+  console.log(nOrdersUnpaid);
 
   return (
     <Navbar bg="blue" expand="lg">
@@ -30,28 +59,33 @@ const NavBar = () => {
               {/* <FontAwesomeIcon className="fa-lg" icon={faHome} /> */}
               {"Homepage"}
             </Nav.Link>
-            {user === 'User' && (
-            <Nav.Link href="/unpaidorders">Unpaid Orders</Nav.Link>
+            {!isLoading && user === "User" && nOrdersUnpaid > 0 && (
+              <Nav.Link href="/unpaidorders">Unpaid Orders</Nav.Link>
             )}
-            {user === 'Emp' && (
-              <Nav.Link href="/optionals">Optionals</Nav.Link>
+            {user === "Emp" && (
+              <React.Fragment>
+                <Nav.Link href="/optionals">Optionals</Nav.Link>
+
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Something
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </React.Fragment>
             )}
 
             {}
             {/* <Nav.Link href="/">Orders History</Nav.Link> */}
 
             {/* <Nav.Link href="">Link</Nav.Link> */}
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
           <Nav>
             {/* <Nav.Link eventKey={2} href="#memes">
