@@ -33,6 +33,7 @@ const confirmSchema = Yup.object().shape({
   description: Yup.string().required(),
   validity: Yup.number().integer().required(), //numero di mesi richiesti dall'utente
   price: Yup.number().integer().moreThan(0),
+  priceWithOptionals: Yup.number().integer().moreThan(0),
 });
 
 const PackagePage = () => {
@@ -51,6 +52,7 @@ const PackagePage = () => {
       description: "",
       validity: "",
       price: 0,
+      priceWithOptionals: 0,
       optionals: [],
       services : [],
       date : "",
@@ -63,7 +65,8 @@ const PackagePage = () => {
   const handleChangeValidity = (validity) => {
     let amount = validity.childNodes[0].innerText;
     let months = validity.childNodes[1].innerText;
-    confirmationData.setFieldValue("price", parseFloat(amount.split(" ")[1]));
+    confirmationData.setFieldValue("price", parseFloat(amount.split(" ")[1]) * months);
+    confirmationData.setFieldValue("priceWithOptionals", parseFloat(amount.split(" ")[1]) * months)
     confirmationData.setFieldTouched("price");
     confirmationData.setFieldValue("validity", months);
   };
@@ -73,20 +76,22 @@ const PackagePage = () => {
     confirmationData.setFieldValue("date", data.value)
   }
 
+  console.log(confirmationData.values)
+
   const AddOptional = (id, montlycost, name) => {
     let array = confirmationData.values.optionals;
     let found = 0;
 
     for (let i = 0; i < array.length; i++) {
-      if (array[i].id == id) {
+      if (array[i].OptID == id) {
         array.splice(i, 1);
-        confirmationData.values.price -= parseFloat(montlycost);
+        confirmationData.values.priceWithOptionals -= parseFloat(montlycost * confirmationData.values.validity);
         found = 1;
       }
     }
     if (!found) {
-      array.push({ id, montlycost, name });
-      confirmationData.values.price += parseFloat(montlycost);
+      array.push({ OptID: parseInt(id), montlycost, name });
+      confirmationData.values.priceWithOptionals += parseFloat(montlycost * confirmationData.values.validity);;
     }
 
     confirmationData.setFieldValue("optionals", array);
@@ -234,9 +239,13 @@ const PackagePage = () => {
                         className="row text-decoration-underline"
                         style={{ fontWeight: "bold" }}
                       >
-                        <div className="col-9">Total:</div>
+                        <div className="col-9 mb-2">Price package: </div>
                         <div className="col">
                           {"€ " + confirmationData.values.price}
+                        </div>
+                        <div className="col-9">Total with optionals:</div>
+                        <div className="col">
+                          {"€ " + confirmationData.values.priceWithOptionals}
                         </div>
                       </div>
                     </div>

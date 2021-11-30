@@ -12,8 +12,37 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
+import { useHttpClient } from "../../util/http-hook";
+import Swal from "sweetalert2";
 const ListaOrdini = (props) => {
+  const { sendRequest, isLoading } = useHttpClient();
   const navigate = useNavigate();
+
+  const payOrder = async (id) => {
+   
+    try{
+      await sendRequest(
+        process.env.REACT_APP_JAVA_BASE_URL + `/order/payOrder/${id}`,
+        "GET",
+        null,
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      Swal.fire({
+        icon: "success",
+        title: "Order paid!",
+      });
+    } catch(err) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong...",
+        text: err.message,
+      });
+    }
+    
+    
+  }
 
   if (props.orders.length === 0) {
     return (
@@ -57,13 +86,13 @@ const ListaOrdini = (props) => {
                               " months"}
                           </p>
                         </p>
-                        <p>{"Total Amount: €" + ord.amount}</p>
+                        <p>{"Total Amount: €" + ord.amountWithOptionals}</p>
                       </div>
                       <div className="col-md-4 col-12 text-center mb-3">
                         <Button
                           color="google plus"
                           size="big"
-                          onClick={() => {
+                          /*onClick={() => {
                             let array = [];
                             for (
                               let i = 0;
@@ -84,6 +113,10 @@ const ListaOrdini = (props) => {
                             navigate("/confirmationpage", {
                               state: ord.pkg,
                             });
+                          }} */
+                          onClick ={() => {
+                            payOrder(ord.orderID)
+                            navigate('/')
                           }}
                         >
                           <FontAwesomeIcon icon={faCartPlus} />

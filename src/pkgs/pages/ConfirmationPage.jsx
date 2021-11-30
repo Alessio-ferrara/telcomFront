@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useHttpClient } from "../../util/http-hook";
 
-import {Button, Label, Segment } from "semantic-ui-react";
+import { Button, Label, Header, Segment } from "semantic-ui-react";
 import Swal from "sweetalert2";
-
 
 import authService from "../../services/authService";
 import moment from "moment";
@@ -29,9 +28,10 @@ const ConfirmationPage = (props) => {
           datetime: moment().format("DD/MM/YYYY"),
           paid: success,
           amount: parseInt(data.price),
+          amountWithOptionals: parseInt(data.priceWithOptionals),
           startingDate: moment(data.date).format("DD/MM/YYYY"),
           duration: parseInt(data.validity),
-          optionals: data.optionals
+          optionals: data.optionals,
         }),
         {
           "Content-Type": "application/json",
@@ -59,6 +59,8 @@ const ConfirmationPage = (props) => {
       });
     }
   };
+
+  console.log(data);
 
   return (
     <div className="container mt-3">
@@ -110,7 +112,7 @@ const ConfirmationPage = (props) => {
         <div className="row">
           <div className="col-md-9 col-12"></div>
           <div className="col-md-3 col-12 display-6 text-center">
-            Total Cost: €{data.price}
+            Total Cost: €{data.priceWithOptionals}
           </div>
         </div>
         <div className="row">
@@ -143,8 +145,7 @@ const ConfirmationPage = (props) => {
                       color="blue"
                       onClick={() => {
                         navigate("/login", {
-                          state: { info: data },
-                          from: "/confirmationpage",
+                          state: { info: data, from: "/confirmationpage" },
                         });
                       }}
                     >
@@ -154,8 +155,7 @@ const ConfirmationPage = (props) => {
                     <Button
                       onClick={() => {
                         navigate("/signup", {
-                          state: { info: data },
-                          from: "/confirmationpage",
+                          state: { info: data, from: "/confirmationpage" },
                         });
                       }}
                     >
