@@ -21,6 +21,7 @@ import LoginAdministrator from "./auth/pages/LoginAdministrator";
 import UnpaidOrders from "./orders/pages/UnpaidOrders.jsx";
 import Registration from "./auth/pages/Registration";
 import Optionals from "./employee/optionals/pages/Optionals";
+import SalesReport from "./employee/salesReport/pages/SalesReport";
 function App() {
   const user = authService.getCurrentRuolo();
 
@@ -41,6 +42,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePageEmp />} />
           <Route path="/optionals" element={<Optionals />} />
+          <Route path="/salesReport" element={<SalesReport/>} />
         </Routes>
       );
     }
