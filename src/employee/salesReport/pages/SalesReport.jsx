@@ -9,6 +9,7 @@ import TableAvg from "../components/TableAvg";
 import TableInsolvent from "../components/TableInsolvent";
 import TableAlerts from "../components/TableAlerts";
 import TableSuspendedOrder from "../components/TableSuspendedOrder";
+import TableBestSeller from "../components/TableBestSeller";
 
 const SalesReport = () => {
   const { sendRequest, isLoading } = useHttpClient();
@@ -40,7 +41,6 @@ const SalesReport = () => {
     getReports();
   }, [sendRequest]);
 
-  console.log(reports);
 
   return (
     <div className="container mt-2">
@@ -99,6 +99,9 @@ const SalesReport = () => {
           )}
           {!isLoading && reports && activeItem === "Suspended Orders" && (
               <TableSuspendedOrder orders = {reports.suspendedOrders} />
+          )}
+          {!isLoading && reports && activeItem === "BestSeller Optional" && (
+              <TableBestSeller opt = {reports.bestOptional} />
           )}
       </Segment>
 
