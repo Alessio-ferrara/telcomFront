@@ -125,7 +125,7 @@ const Login = () => {
 
                   <Button
                     type="submit"
-                    color="blue"
+                    color="facebook"
                     className="rounded-pill" 
                     floated="right"
                     onClick={loginData.handleSubmit}

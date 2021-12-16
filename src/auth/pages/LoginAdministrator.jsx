@@ -90,7 +90,7 @@ const LoginAdministrator = () => {
                   />
                   <Button
                     type="submit"
-                    color="blue"
+                    color="facebook"
                     floated="right"
                     className="rounded-pill" 
                     onClick={loginData.handleSubmit}

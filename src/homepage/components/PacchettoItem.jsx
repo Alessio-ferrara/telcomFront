@@ -24,8 +24,9 @@ const PacchettoItem = (props) => {
             
             <Link
               to={`/packagedetails/${props.id_pkg}`}
-              className=" btn btn-primary btn-lg text-decoration-none mt-3 mb-3 rounded-pill"
+              className=" btn btn-lg text-decoration-none mt-3 mb-3 rounded-pill"
               activeClassName="active"
+              style={{backgroundColor:"#3b5998", color:"white"}}
             >
               Scopri di più &nbsp;
               <Icon name="arrow right"></Icon>

@@ -141,7 +141,7 @@ const ConfirmationPage = (props) => {
                 <div>
                   <Button.Group size="huge">
                     <Button
-                      color="blue"
+                      color="facebook"
                       onClick={() => {
                         navigate("/login", {
                           state: { info: data, from: "/confirmationpage" },

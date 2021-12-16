@@ -117,7 +117,7 @@ const Registration = () => {
 
                   <Button
                     type="submit"
-                    color="blue"
+                    color="facebook"
                     floated="right"
                     onClick={loginData.handleSubmit}
                   >

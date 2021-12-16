@@ -11,10 +11,7 @@ import {
 } from "react-router-dom";
 import { useHttpClient } from "../../util/http-hook";
 import {
-  faCartPlus,
-  faShoppingCart,
   faShoppingBag,
-  faBroadcastTower,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -24,7 +21,9 @@ import Swal from "sweetalert2";
 import * as Yup from "yup";
 import ListaServizi from "../components/ListaServizi";
 import ListaOptional from "../components/ListaOptional";
-import ConfirmationPage from "./ConfirmationPage";
+
+const today = new Date();
+today.setHours(0, 0, 0, 0)
 
 //dati che ci servono obbligatoriamente per prendere le cose
 const confirmSchema = Yup.object().shape({
@@ -34,6 +33,7 @@ const confirmSchema = Yup.object().shape({
   validity: Yup.number().integer().required(), //numero di mesi richiesti dall'utente
   price: Yup.number().integer().moreThan(0),
   priceWithOptionals: Yup.number().integer().moreThan(0),
+  date: Yup.date().min(today, "Date cannot be in the past")
 });
 
 const PackagePage = () => {
@@ -191,6 +191,7 @@ const PackagePage = () => {
                         label="Number of months:"
                         id="validity"
                         selection
+                        error={confirmationData.errors.validity}
                         compact
                         options={prices}
                         onChange={(e) => {
@@ -202,6 +203,7 @@ const PackagePage = () => {
                     )}
                     <SemanticDatepicker
                     locale="it-IT"
+                    error={confirmationData.errors.date}
                     label = "Starting from:"
                     filterDate={(date) => {
                       const now = new Date();
@@ -222,12 +224,7 @@ const PackagePage = () => {
                           color="facebook"
                           className="rounded-pill" 
                           size="big"
-                          onClick={() => {
-                            navigate("/confirmationpage", {
-                              state: confirmationData.values,
-
-                            });
-                          }}
+                          onClick={confirmationData.handleSubmit}
                         >
                           <FontAwesomeIcon icon={faShoppingBag} />
                           &nbsp; Purchase
