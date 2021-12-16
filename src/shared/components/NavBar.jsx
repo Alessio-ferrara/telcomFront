@@ -74,7 +74,7 @@ const NavBar = () => {
             {user ? (
               <React.Fragment>
                 <Nav.Link
-                  className="right-align btn btn-dark rounded-end text-light pl-3 pr-3"
+                  className="right-align btn btn-dark rounded-pill text-light pl-3 pr-3"
                   style={{ marginLeft: 5 }}
                   onClick={() => {
                     authService.logout();

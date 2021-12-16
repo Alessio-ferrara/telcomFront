@@ -5,11 +5,11 @@ const ListaOptionalEmp = (props) => {
   if (props.optionals.length > 0) {
     return (
       <React.Fragment>
-        <div className="my-2 mx-3">
+        <div className="my-2 mx-3 mt-3">
           <div className="row">
             {props.optionals.map((optional) => (
-              <div className="col-md-3 p-0 mb-3">
-                <Label tag color="blue">
+              <div className="col-md-2 p-0 mb-3">
+                <Label tag fluid color="">
                   {optional.name}
                   <Label.Detail>{optional.montlyCost} €</Label.Detail>
                 </Label>

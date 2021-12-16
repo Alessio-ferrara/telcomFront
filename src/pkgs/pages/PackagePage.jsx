@@ -181,7 +181,7 @@ const PackagePage = () => {
                 <div class="card-body">
                   <div class="card-title text-center display-6"> Purchase Package </div>
                   <p class="card-text">
-                    You can add optional services to your standar package by
+                    You can add optional services to the default package by
                     selecting them in the form below
                   </p>
                   {/* INIZIO DEL FORM PER COMPLETARE L ACQUISTO */}
@@ -220,6 +220,7 @@ const PackagePage = () => {
                         <Button
                           fluid
                           color="facebook"
+                          className="rounded-pill" 
                           size="big"
                           onClick={() => {
                             navigate("/confirmationpage", {

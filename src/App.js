@@ -55,7 +55,6 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/packagedetails/:pkgID" element={<PackagePage />} />
         <Route path="/confirmationpage" element={<ConfirmationPage />} />
-        {/* DEFAULT RENDERING TO THE LANDING PAGE IF WE ACCESS TO A FORBIDDEN */}
         <Route path="*" element={<LandingPage />} />
       </Routes>
     );

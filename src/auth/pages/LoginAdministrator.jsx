@@ -62,7 +62,7 @@ const LoginAdministrator = () => {
             <Card color="blue" centered fluid>
               <Card.Header>
                 <Header as="h2" className="text-center my-3">
-                  Administrator login
+                  LOGIN AS ADMINISTRATOR
                 </Header>
               </Card.Header>
               <Card.Content>
@@ -92,9 +92,10 @@ const LoginAdministrator = () => {
                     type="submit"
                     color="blue"
                     floated="right"
+                    className="rounded-pill" 
                     onClick={loginData.handleSubmit}
                   >
-                    <Icon name="sign in" /> Accedi
+                    <Icon name="sign in" /> ACCEDI
                   </Button>
                 </Form>
               </Card.Content>

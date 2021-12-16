@@ -12,7 +12,8 @@ const ListaValidity = (props) => {
             className="mt-3 "
             style={{ fontSize: "15px", fontWeight: "bolder" }}
           >
-            No validity periods added , try to add some before inserting the package!
+            No validity periods added!  
+            To create a Service Package you need to add one or more validity periods.
           </p>
         </div>
       </div>
@@ -23,8 +24,8 @@ const ListaValidity = (props) => {
         <Table celled unstackable> 
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Duration</Table.HeaderCell>
-              <Table.HeaderCell>Amount</Table.HeaderCell>
+              <Table.HeaderCell>N. of Months</Table.HeaderCell>
+              <Table.HeaderCell>Monthly cost</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

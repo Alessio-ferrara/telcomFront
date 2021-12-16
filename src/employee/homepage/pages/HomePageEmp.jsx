@@ -135,7 +135,7 @@ const HomePageEmp = () => {
           <Card color="blue" centered fluid>
             <Card.Header>
               <Header as="h2" className="text-center my-3">
-                Add new package service
+                Create a new Service Package
               </Header>
             </Card.Header>
             <Card.Content>
@@ -161,15 +161,15 @@ const HomePageEmp = () => {
                     }
                   />
                 </Form.Group>
-
-                <Label color="blue" tag>
-                  Services
+                <hr />
+                <Label className="" color="">
+                  Included Services
                 </Label>
                 <Button
-                  className="mt-md-0 mt-3 col-lg-2 col-md-4  col-12"
+                  className="mt-md-0 mt-3 col-lg-2 col-md-4 col-12 rounded-pill"
                   icon
                   labelPosition="left"
-                  size="mini"
+                  size="tiny"
                   floated="right"
                   color="green"
                   onClick={() => setNewService(true)}
@@ -183,35 +183,37 @@ const HomePageEmp = () => {
                     clickService={clickService}
                   />
                 )}
-                <div className="mb-3">
-                  <Label color="blue" tag>
-                    Validity and price
-                  </Label>
+                <hr />
+                <div className="mb-3 mt-3">
+                  <Label color="">Validity and price</Label>
                   <Button
-                    className="mt-md-0 mt-3 mb-md-0 mb-3 col-lg-2 col-md-4 col-12"
+                    className="mt-md-0 mt-3 mb-md-0 mb-3 col-lg-2 col-md-4 col-12 rounded-pill"
                     icon
                     labelPosition="left"
-                    size="mini"
+                    size="tiny"
                     floated="right"
                     color="green"
                     onClick={() => setNewValidityPeriod(true)}
                   >
                     <Icon name="add" />
-                    Add validity
+                    Add new validity
                   </Button>
                 </div>
 
                 {validityPeriods && (
                   <ListaValidity validity={validityPeriods} />
                 )}
-                <Button
-                  type="submit"
-                  color="blue"
-                  floated="right"
-                  onClick={pkgData.handleSubmit}
-                >
-                  <Icon name="add" /> Insert
-                </Button>
+                <hr />
+                <center>
+                  <Button
+                  className="rounded-pill"
+                    type="submit"
+                    color="blue"
+                    onClick={pkgData.handleSubmit}
+                  >
+                    <Icon name="add" /> Add Service Package
+                  </Button>
+                </center>
               </Form>
             </Card.Content>
           </Card>

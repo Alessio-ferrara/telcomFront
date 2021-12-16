@@ -164,7 +164,7 @@ const ConfirmationPage = (props) => {
                   </Button.Group>
                 </div>
               ) : (
-                <Button size="huge" color="facebook" onClick={createOrder}>
+                <Button className="rounded-pill" size="huge" color="facebook" onClick={createOrder}>
                   Confirm Purchase
                 </Button>
               )}

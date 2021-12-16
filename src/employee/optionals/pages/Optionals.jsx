@@ -52,21 +52,24 @@ const Optionals = () => {
       )}
       {/* usare un component in cui importare i dati per formattarli nel frontend */}
       <div className="jumbotron mt-2">
-        <div className="container ">
-          <Button
-            className="mt-md-0 mt-3 mb-3 col-lg-2 col-md-4 col-12"
-            icon
-            size="small"
-            color="green"
-            onClick={() => setNewOptional(true)}
-          >
-            <Icon name="add" />
-            Add optional
-          </Button>
-
+        <div className="container mt-3 ">
+          <p className="display-6">List of optional services</p>
+          <hr />
           {!isLoading && optionals && (
             <ListaOptionalEmp optionals={optionals} />
           )}
+          <center>
+            <Button
+              className="mt-md-0 mt-3 mb-3 col-lg-2 col-md-4 col-12 rounded-pill"
+              icon
+              size="medium"
+              color="blue"
+              onClick={() => setNewOptional(true)}
+            >
+              <Icon name="add" />
+               Add new optional
+            </Button>
+          </center>
         </div>
       </div>
     </React.Fragment>

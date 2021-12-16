@@ -48,7 +48,7 @@ const AggiungiValidity = (props) => {
           <Form>
             <Form.Group widths="equal">
               <Form.Input
-                label="Duration"
+                label="Duration (months)"
                 id="duration"
                 fluid
                 value={validityData.values.duration}
@@ -59,7 +59,7 @@ const AggiungiValidity = (props) => {
                 onBlur={validityData.handleBlur}
               />
               <Form.Input
-                label="Amount"
+                label="Monthly cost"
                 id="amount"
                 icon={<Icon name="euro sign"/>}
                 fluid

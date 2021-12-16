@@ -71,7 +71,7 @@ const Login = () => {
             <Card color="blue" centered fluid>
               <Card.Header>
                 <Header as="h2" className="text-center my-3">
-                  Login
+                  LOGIN
                 </Header>
               </Card.Header>
               <Card.Content>
@@ -124,10 +124,11 @@ const Login = () => {
                   <Button
                     type="submit"
                     color="blue"
+                    className="rounded-pill" 
                     floated="right"
                     onClick={loginData.handleSubmit}
                   >
-                    <Icon name="sign in" /> Accedi
+                    <Icon name="sign in" /> ACCEDI
                   </Button>
                 </Form>
               </Card.Content>

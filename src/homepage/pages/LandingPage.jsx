@@ -36,10 +36,10 @@ const LandingPage = () => {
       {/* usare un component in cui importare i dati per formattarli nel frontend */}
       <div className="jumbotron">
         <div className="container mt-2">
-          <h1>Welcome to Telcom</h1>
+          <h1>WELCOME TO TELCOM</h1>
           <p>The newest company for mobile and fixed telehone! </p>
           <hr />
-          <h3>Have a look to our available packages</h3>
+          <h3 className="mt-3">HAVE A LOOK TO OUR NEWEST PACKAGES</h3>
           {!isLoading && pacchetti && (
             <ListaPacchetti pacchetti = {pacchetti}  />
             // uso il component listapacchetti passando i pacchetti ricevuti dopo la query al backend
