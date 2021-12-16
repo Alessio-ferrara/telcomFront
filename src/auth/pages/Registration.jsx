@@ -61,7 +61,7 @@ const Registration = () => {
       } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: error.message,
         });
       }

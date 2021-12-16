@@ -124,7 +124,7 @@ const PackagePage = () => {
       } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: error.message,
         });
       }
@@ -141,7 +141,7 @@ const PackagePage = () => {
       } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: error.message,
         });
       }

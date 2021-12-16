@@ -41,20 +41,19 @@ const ConfirmationPage = (props) => {
       if (success) {
         Swal.fire({
           icon: "success",
-          title: "Qualcosa è andato storto...",
-          text: "Payment completed.",
+          title: "Payment completed."
         }).then(() => navigate("/"));
       } else if (!success) {
         Swal.fire({
           icon: "warning",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: "Payment not completed. The order is created but you need to finalize the payment.",
         }).then(() => navigate("/unpaidorders"));
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Qualcosa è andato storto...",
+        title: "Something went wrong...",
         text: error.message,
       });
     }
