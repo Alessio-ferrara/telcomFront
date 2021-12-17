@@ -16,6 +16,8 @@ const ConfirmationPage = (props) => {
   const navigate = useNavigate();
   const utente = authService.getCurrentToken();
 
+  console.log(location)
+
   const createOrder = async () => {
     try {
       const success = Math.random() < 0.5 ? true : false;

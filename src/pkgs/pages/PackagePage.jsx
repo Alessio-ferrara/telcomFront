@@ -55,13 +55,15 @@ const PackagePage = () => {
       priceWithOptionals: 0,
       optionals: [],
       services : [],
-      date : "",
+      date : new Date(),
     },
     validationSchema: confirmSchema,
     onSubmit: async (values) => {
-      navigate.push({ pathname: "/confirmationPage", state: values });
+      console.log(values)
+      navigate("/confirmationPage", {state: values });
     },
   });
+
   const handleChangeValidity = (validity) => {
     let amount = validity.childNodes[0].innerText;
     let months = validity.childNodes[1].innerText;
