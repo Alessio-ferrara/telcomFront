@@ -55,9 +55,11 @@ const Login = () => {
           navigate(0);
         }
       } catch (error) {
+
+        console.log(error)
         Swal.fire({
           icon: "error",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: error.message,
         });
       }
@@ -123,7 +125,7 @@ const Login = () => {
 
                   <Button
                     type="submit"
-                    color="blue"
+                    color="facebook"
                     className="rounded-pill" 
                     floated="right"
                     onClick={loginData.handleSubmit}

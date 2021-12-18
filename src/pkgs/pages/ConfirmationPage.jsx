@@ -16,6 +16,8 @@ const ConfirmationPage = (props) => {
   const navigate = useNavigate();
   const utente = authService.getCurrentToken();
 
+  console.log(location)
+
   const createOrder = async () => {
     try {
       const success = Math.random() < 0.5 ? true : false;
@@ -41,20 +43,19 @@ const ConfirmationPage = (props) => {
       if (success) {
         Swal.fire({
           icon: "success",
-          title: "Qualcosa è andato storto...",
-          text: "Payment completed.",
+          title: "Payment completed."
         }).then(() => navigate("/"));
       } else if (!success) {
         Swal.fire({
           icon: "warning",
-          title: "Qualcosa è andato storto...",
+          title: "Something went wrong...",
           text: "Payment not completed. The order is created but you need to finalize the payment.",
         }).then(() => navigate("/unpaidorders"));
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Qualcosa è andato storto...",
+        title: "Something went wrong...",
         text: error.message,
       });
     }
@@ -142,7 +143,7 @@ const ConfirmationPage = (props) => {
                 <div>
                   <Button.Group size="huge">
                     <Button
-                      color="blue"
+                      color="facebook"
                       onClick={() => {
                         navigate("/login", {
                           state: { info: data, from: "/confirmationpage" },

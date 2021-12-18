@@ -82,8 +82,8 @@ const NavBar = () => {
               </React.Fragment>
             ) : (
               <Nav.Link
-                className="right-align btn btn-primary rounded-pill text-light pl-3 pr-3"
-                style={{ marginLeft: 5 }}
+                className="right-align btn rounded-pill text-light pl-3 pr-3"
+                style={{ marginLeft: 5, color: "white", backgroundColor: "#3b5998" }}
                 href="/login"
               >
                 &nbsp;Log-in / Sign-up &nbsp;
