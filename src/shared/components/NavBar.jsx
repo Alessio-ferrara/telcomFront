@@ -26,29 +26,25 @@ const NavBar = () => {
           );
           setnOrdersUnpaid(response.length);
         } catch (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Qualcosa è andato storto...",
-            text: error.message,
-          });
+          console.log(error);
         }
       }
     };
     getOrdini();
   }, [sendRequest]);
 
-  console.log(nOrdersUnpaid);
 
   return (
     <Navbar bg="blue" expand="lg">
-      <Container className="">
+      <Container>
+        {/* className=" bg-opacity-100 bg-light rounded-pill text-light" */}
         <Navbar.Brand href="/">
           <img
             alt=""
             width="35"
             height="35"
             src="/logo.jpeg"
-            className="d-inline-block align-end"
+            className="d-inline-block align-end rounded-pill"
           />
           {"Telcom"}
         </Navbar.Brand>{" "}

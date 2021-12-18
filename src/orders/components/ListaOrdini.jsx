@@ -40,8 +40,6 @@ const ListaOrdini = (props) => {
         text: err.message,
       });
     }
-    
-    
   }
 
   if (props.orders.length === 0) {
