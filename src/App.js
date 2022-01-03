@@ -54,7 +54,7 @@ function App() {
         <Route path="/loginadministrator" element={<LoginAdministrator />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/packagedetails/:pkgID" element={<PackagePage />} />
-        <Route path="/confirmationpage" element={<ConfirmationPage />} />
+        <Route path="/confirmationPage" element={<ConfirmationPage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     );

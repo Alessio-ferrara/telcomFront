@@ -59,7 +59,6 @@ const PackagePage = () => {
     },
     validationSchema: confirmSchema,
     onSubmit: async (values) => {
-      console.log(values)
       navigate("/confirmationPage", {state: values });
     },
   });

@@ -45,6 +45,8 @@ const Login = () => {
           responseData.token,
           responseData.type
         );
+
+        
         if (data && data.from) {
           navigate(data.from, {
             state: data.info,

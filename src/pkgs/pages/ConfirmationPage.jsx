@@ -11,12 +11,11 @@ import moment from "moment";
 
 const ConfirmationPage = (props) => {
   const location = useLocation();
+  
   const { sendRequest, isLoading } = useHttpClient();
   const data = location.state;
   const navigate = useNavigate();
   const utente = authService.getCurrentToken();
-
-  console.log(location)
 
   const createOrder = async () => {
     try {
@@ -61,7 +60,6 @@ const ConfirmationPage = (props) => {
     }
   };
 
-  console.log(data);
 
   return (
     <div className="container mt-3">

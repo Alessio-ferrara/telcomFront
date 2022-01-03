@@ -21,6 +21,8 @@ const Registration = () => {
   const data = location.state;
   const navigate = useNavigate();
 
+  console.log(data)
+
   const loginData = useFormik({
     initialValues: {
       username: "",
@@ -42,21 +44,13 @@ const Registration = () => {
             "Content-Type": "application/json",
           }
         );
-
-        authService.login(
-          responseData.userID,
-          responseData.username,
-          responseData.token,
-          responseData.type
-        );
+          console.log(data)
         if (data && data.from) {
-          navigate(data.from, {
-            state: data.info,
+          navigate("/login", {
+            state: data,
           });
-          navigate(0);
         } else {
-          navigate("/");
-          navigate(0);
+          navigate("/login")
         }
       } catch (error) {
         Swal.fire({
