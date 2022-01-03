@@ -19,9 +19,9 @@ const ConfirmationPage = (props) => {
   const navigate = useNavigate();
   const utente = authService.getCurrentToken();
 
-  const createOrder = async () => {
+  const createOrder = async (s) => {
     try {
-      const success = Math.random() < 0.5 ? true : false;
+      const success = s || Math.random() < 0.5 ? true : false;
       await sendRequest(
         process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
         "POST",
@@ -216,14 +216,32 @@ const ConfirmationPage = (props) => {
                   </Button.Group>
                 </div>
               ) : (
-                <Button
-                  className="rounded-pill"
-                  size="huge"
-                  color="facebook"
-                  onClick={createOrder}
-                >
-                  Confirm Purchase
-                </Button>
+                <div>
+                  <Button
+                    className="rounded-pill"
+                    size="huge"
+                    color="facebook"
+                    onClick={() => createOrder()}
+                  >
+                    Confirm Purchase
+                  </Button>
+                  <Button
+                    className="rounded-pill mt-3"
+                    size="mini"
+                    color="green"
+                    onClick={()=>createOrder(true)}
+                  >
+                    Complete payment
+                  </Button>
+                  <Button
+                    className="rounded-pill mt-3"
+                    size="mini"
+                    color="red"
+                    onClick={()=>createOrder(false)}
+                  >
+                    Fail payment
+                  </Button>
+                </div>
               )}
             </div>
           </div>
