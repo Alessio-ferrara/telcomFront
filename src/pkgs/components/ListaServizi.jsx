@@ -26,6 +26,7 @@ const ListaServizi = (props) => {
                   key={servizio.serviceID}
                   name={servizio.name}
                   description={servizio.description}
+                  servizio={servizio}
                   />
               ))}
             </div>

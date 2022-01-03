@@ -77,7 +77,6 @@ const PackagePage = () => {
     confirmationData.setFieldValue("date", data.value)
   }
 
-  console.log(confirmationData.values)
 
   const AddOptional = (id, montlycost, name) => {
     let array = confirmationData.values.optionals;
