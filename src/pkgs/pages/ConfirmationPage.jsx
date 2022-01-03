@@ -19,27 +19,47 @@ const ConfirmationPage = (props) => {
   const navigate = useNavigate();
   const utente = authService.getCurrentToken();
 
+  console.log(data);
+
   const createOrder = async (s) => {
     try {
-      const success = s || Math.random() < 0.5 ? true : false;
-      await sendRequest(
-        process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
-        "POST",
-        JSON.stringify({
-          refUser: parseInt(authService.getCurrentId()),
-          refPkg: parseInt(data.id_pkg),
-          datetime: moment().format("DD/MM/YYYY"),
-          paid: success,
-          amount: parseInt(data.price),
-          amountWithOptionals: parseInt(data.priceWithOptionals),
-          startingDate: moment(data.date).format("DD/MM/YYYY"),
-          duration: parseInt(data.validity),
-          optionals: data.optionals,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      console.log(s)
+      const success = s != null ? s : (Math.random() < 0.5 ? true : false);
+      //I check if the data have an orderID, in this case the data are coming from an unpaid order
+      if (data.orderID) {
+        await sendRequest(
+          process.env.REACT_APP_JAVA_BASE_URL +
+            "/order/payOrder/" +
+            data.orderID,
+          "POST",
+          JSON.stringify({
+            paid: success,
+            userID: parseInt(authService.getCurrentId()),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+      } else {
+        await sendRequest(
+          process.env.REACT_APP_JAVA_BASE_URL + "/order/createOrder",
+          "POST",
+          JSON.stringify({
+            refUser: parseInt(authService.getCurrentId()),
+            refPkg: parseInt(data.id_pkg),
+            datetime: moment().format("DD/MM/YYYY"),
+            paid: success,
+            amount: parseInt(data.price),
+            amountWithOptionals: parseInt(data.priceWithOptionals),
+            startingDate: moment(data.date).format("DD/MM/YYYY"),
+            duration: parseInt(data.validity),
+            optionals: data.optionals,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+      }
 
       if (success) {
         Swal.fire({
@@ -229,7 +249,7 @@ const ConfirmationPage = (props) => {
                     className="rounded-pill mt-3"
                     size="mini"
                     color="green"
-                    onClick={()=>createOrder(true)}
+                    onClick={() => createOrder(true)}
                   >
                     Complete payment
                   </Button>
@@ -237,7 +257,7 @@ const ConfirmationPage = (props) => {
                     className="rounded-pill mt-3"
                     size="mini"
                     color="red"
-                    onClick={()=>createOrder(false)}
+                    onClick={() => createOrder(false)}
                   >
                     Fail payment
                   </Button>

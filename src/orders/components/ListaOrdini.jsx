@@ -19,8 +19,7 @@ const ListaOrdini = (props) => {
   const navigate = useNavigate();
 
   const payOrder = async (id) => {
-   
-    try{
+    try {
       await sendRequest(
         process.env.REACT_APP_JAVA_BASE_URL + `/order/payOrder/${id}`,
         "GET",
@@ -33,14 +32,14 @@ const ListaOrdini = (props) => {
         icon: "success",
         title: "Order paid!",
       });
-    } catch(err) {
+    } catch (err) {
       Swal.fire({
         icon: "error",
         title: "Something went wrong...",
         text: err.message,
       });
     }
-  }
+  };
 
   if (props.orders.length === 0) {
     return (
@@ -90,7 +89,7 @@ const ListaOrdini = (props) => {
                         <Button
                           color="google plus"
                           size="big"
-                          /*onClick={() => {
+                          onClick={() => {
                             let array = [];
                             for (
                               let i = 0;
@@ -108,13 +107,10 @@ const ListaOrdini = (props) => {
                               ord.startingDate,
                               "YYYY-MM-DDTHH:mm"
                             ).format();
+                            ord.pkg.orderID = ord.orderID;
                             navigate("/confirmationpage", {
                               state: ord.pkg,
                             });
-                          }} */
-                          onClick ={() => {
-                            payOrder(ord.orderID)
-                            navigate('/')
                           }}
                         >
                           <FontAwesomeIcon icon={faCartPlus} />
