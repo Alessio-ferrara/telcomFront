@@ -45,7 +45,7 @@ const ServizioItem = (props) => {
         </div>
       )}
 
-      {props.servizio.type == "Mobile Internet" && (
+      {(props.servizio.type == "Mobile Internet" || props.servizio.type === "Fixed Internet") && (
         <div style={{ fontSize: "0.6em" }}>
           <div className="row">
             <div className="col-6">

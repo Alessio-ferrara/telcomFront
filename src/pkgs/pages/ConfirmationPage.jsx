@@ -8,10 +8,12 @@ import Swal from "sweetalert2";
 
 import authService from "../../services/authService";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCube } from "@fortawesome/free-solid-svg-icons";
 
 const ConfirmationPage = (props) => {
   const location = useLocation();
-  
+
   const { sendRequest, isLoading } = useHttpClient();
   const data = location.state;
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const ConfirmationPage = (props) => {
       if (success) {
         Swal.fire({
           icon: "success",
-          title: "Payment completed."
+          title: "Payment completed.",
         }).then(() => navigate("/"));
       } else if (!success) {
         Swal.fire({
@@ -59,7 +61,6 @@ const ConfirmationPage = (props) => {
       });
     }
   };
-
 
   return (
     <div className="container mt-3">
@@ -78,15 +79,67 @@ const ConfirmationPage = (props) => {
         <div className="col-6">
           <h4 style={{ fontWeight: "bold" }}>Included services:</h4>
         </div>
-        <span className="col-6">
+        <div className="col-6">
           <ul>
             {data.services.map((service) => (
-              <Label color="blue" size="large" className="mb-2">
-                {service.name}
+              <Label fluid color="blue" size="large" className="mb-2 col-12">
+                <div style={{ fontSize: "0.9em" }} className="row">
+                  <div className="col-6">
+                    {" "}
+                    <FontAwesomeIcon icon={faCube} /> {service.type}
+                  </div>
+                  <div className="col-6"> {service.name}</div>
+                </div>
+
+                {service.type === "Mobile Phone" && (
+                  <div style={{ fontSize: "0.8em" }} className="row mt-2">
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        Minutes every month:{" "}
+                      </span>
+                      {service.numberOfMinutes}
+                    </div>
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        Sms every month:{" "}
+                      </span>
+                      {service.numberOfSms}
+                    </div>
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        Fee for extra minute:{" "}
+                      </span>
+                      {service.feeMinutes} €
+                    </div>
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        Fee for extra sms:{" "}
+                      </span>
+                      {service.feeSms} €
+                    </div>
+                  </div>
+                )}
+                {(service.type == "Mobile Internet" ||
+                  service.type === "Fixed Internet") && (
+                  <div style={{ fontSize: "0.8em" }} className="row mt-2">
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        GigaBytes every month:{" "}
+                      </span>
+                      {service.numberOfGB}
+                    </div>
+                    <div className="col-6">
+                      <span style={{ fontWeight: "bold" }}>
+                        Fee for extra GigaByte:{" "}
+                      </span>
+                      {service.feeGB} €
+                    </div>
+                  </div>
+                )}
               </Label>
             ))}
           </ul>
-        </span>
+        </div>
       </div>
       <div className="row">
         <div className="col-6">
@@ -163,7 +216,12 @@ const ConfirmationPage = (props) => {
                   </Button.Group>
                 </div>
               ) : (
-                <Button className="rounded-pill" size="huge" color="facebook" onClick={createOrder}>
+                <Button
+                  className="rounded-pill"
+                  size="huge"
+                  color="facebook"
+                  onClick={createOrder}
+                >
                   Confirm Purchase
                 </Button>
               )}
