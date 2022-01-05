@@ -73,6 +73,7 @@ const NavBar = () => {
                 <Nav.Link
                   className="right-align btn-light rounded-0 text-dark pl-3 pr-3"
                   style={{ marginLeft: 5 }}
+                  href="/"
                 >
                   Welcome back {name}
                 </Nav.Link>
