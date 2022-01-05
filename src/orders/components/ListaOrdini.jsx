@@ -102,6 +102,7 @@ const ListaOrdini = (props) => {
                             }
                             ord.pkg.optionals = array;
                             ord.pkg.price = ord.amount;
+                            ord.pkg.priceWithOptionals = ord.amountWithOptionals
                             ord.pkg.validity = ord.duration;
                             ord.pkg.date = moment(
                               ord.startingDate,
