@@ -108,7 +108,7 @@ const ConfirmationPage = (props) => {
                     {" "}
                     <FontAwesomeIcon icon={faCube} /> {service.type}
                   </div>
-                  <div className="col-6"> {service.name}</div>
+                  <div className="col-6 mt-3"> {service.name}</div>
                 </div>
 
                 {service.type === "Mobile Phone" && (
